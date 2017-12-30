@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+
+    <meta name="theme-color" content="#448AFF">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#448AFF">
+    <meta name="apple-mobile-web-app-title" content="Priority Task List">
+
+    <link rel="icon" href="favicon.ico" type="image/x-icon"/>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
+
+    <link rel="manifest" href="manifest.json">
+
+    <title>Priority Task List</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.0/css/bulma.min.css">
+
+    <!--
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.0/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/spectre.css/0.4.5/spectre.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.3.0/milligram.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gridlex/2.4.1/gridlex.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mini.css/2.3.7/mini-default.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mini.css/2.3.7/mini-dark.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mini.css/2.3.7/mini-lite.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mini.css/2.3.7/mini-nord.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mini.css/2.3.7/mini-pwa.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mini.css/2.3.7/mini-sucroa.min.css">
+    -->
+
+    <link href="index.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+
+  </head>
+
+  <body>
+
+    <div id="app">
+      <br/>
+      <span>route: {{ this.$route.params }}</span>
+      <br/>
+      <router-view></router-view>
+      <br/>
+      <input
+        v-model="newTaskText"
+        v-on:keyup.enter="addNewTask"
+        placeholder="Add a task"
+      >
+      <br/>
+      <button v-on:click="deleteSelected">Delete selected</button>
+      <br/>
+      <ul>
+        <li
+          is="task-item"
+          v-for="(task, index) in tasks"
+          v-bind:key="task.id"
+          v-bind:title="task.title"
+          v-on:remove="tasks.splice(index, 1)"
+          v-on:click.native="onLeftClick(index)"
+        ></li>
+      </ul>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/gh/pouchdb/pouchdb@6.3.4/dist/pouchdb.min.js"></script>
+    <!-- script src="https://cdn.jsdelivr.net/gh/pouchdb/pouchdb@6.3.4/dist/pouchdb.find.min.js"></script -->
+
+    <script>
+      //new PouchDB('prioritytasklist').destroy().then(function () {
+      //    // database destroyed
+      //  }).catch(function (err) {
+      //    // error occurred
+      //  })
+    </script>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+
+    <script src="vuepouch.js"></script>
+
+    <script src="index.js"></script>
+  </body>
+</html>
