@@ -1,26 +1,36 @@
 
+//-------------------------------------------------------------------------
+// task-item
+//-------------------------------------------------------------------------
 Vue.component('task-item', {
+  // TODO:: real html template
+
+  // TODO:: add div, margin, padding
   template: '\
     <li v-on:click="onLeftClick()">\
-      <input v-model=\'title\'>\
+      <textarea v-if="expanded" v-model=\'title\' />\
+      <input v-else v-model=\'title\' />\
       <button v-on:click="$emit(\'remove\')">X</button>\
-      {{ selected }}\
+      {{ expanded }}\
     </li>\
   ',
+  // TODO:: save changes
   props: ['title'],
   data: function () {
     return {
-      selected: false
+      expanded: false
     }
   },
   methods: {
     onLeftClick() {
-      this.selected = true;
+      this.expanded = !this.expanded;
     }
   }
 })
 
+//-------------------------------------------------------------------------
 // this is the Vue.js app
+//-------------------------------------------------------------------------
 var app = new Vue({
     el: '#app',
     //-------------------------------------------------------------------------
