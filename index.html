@@ -42,6 +42,7 @@
   <body>
 
     <div id="app">
+      Add a task:
       <br/>
       <input
         v-model="newTaskText"
@@ -49,11 +50,13 @@
         placeholder="Add a task"
       >
       <br/>
-      <button v-on:click="deleteSelected">Delete selected</button>
+      Press Enter to save the task
       <br/>
       Selected:
       <br/>
       {{ selectedTaskKey }}
+      <br/>
+      <button v-on:click="deleteSelected" :disabled="selectedTaskKey == -1">Delete selected</button>
       <br/>
       <ul>
         <li

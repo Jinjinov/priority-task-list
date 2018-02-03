@@ -1,9 +1,9 @@
 input {
     width: 100px;
-    height: 100px;
+    /* height: 100px; */
     margin: 2px;
     padding: 2px;
-    vertical-align: middle;
+    /* vertical-align: middle; */
 }
 
 textarea {
@@ -12,4 +12,31 @@ textarea {
     margin: 2px;
     padding: 2px;
     vertical-align: middle;
+}
+
+button {
+    margin: 2px;
+    padding: 2px;
+    /* vertical-align: middle; */
+}
+
+ul {
+    margin: 2px;
+    padding: 2px;
+    border-style: solid;
+    border-width: 1px;
+}
+
+li {
+    margin: 2px;
+    padding: 2px;
+    border-style: solid;
+    border-width: 1px;
+}
+
+div {
+    margin: 2px;
+    padding: 2px;
+    border-style: solid;
+    border-width: 1px;
 }

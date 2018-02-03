@@ -7,45 +7,50 @@ Vue.component('task-item', {
   // https://sebastiandedeyne.com/posts/2016/dealing-with-templates-in-vue-20
 
   // TODO::
-  // - display priority
-  // - reset priority button
-  // - priority factor
-  // - increase priority with time * factor
+  // - expanded mode
+  // - sort by priority
 
   // template literal:
   template: `
-    <li v-on:click="onLeftClick()">
-      <textarea v-if="expanded" v-model='taskText' />
-      <input v-else v-model='taskText' />
-      <button v-on:click="$emit('remove')">X</button>
-      {{ expanded }}
+    <li>
+      <div v-on:click="onLeftClick()">
+        {{ priority }}
+        <textarea v-model='taskText' />
+      </div>
+      <div v-if="expanded">
+        <input v-model='priorityFactor' />
+        <button v-on:click="resetPriority()">Reset Priority</button>
+        <button v-on:click="$emit('remove')">Delete</button>
+      </div>
     </li>
   `,
-
-  /*
-  // template string:
-  template: '\
-    <li v-on:click="onLeftClick()">\
-      <textarea v-if="expanded" v-model=\'title\' />\
-      <input v-else v-model=\'title\' />\
-      <button v-on:click="$emit(\'remove\')">X</button>\
-      {{ expanded }}\
-    </li>\
-  ',
-  /**/
 
   // TODO:: save changes
   // https://vuejs.org/v2/guide/components.html#Form-Input-Components-using-Custom-Events
   props: ['taskText'],
   data: function () {
     return {
-      expanded: false
+      expanded: false,
+      priority: 0,
+      priorityFactor: 1,
+      date: new Date().toDateString(),
+      time: new Date().toTimeString()
     }
   },
   methods: {
     onLeftClick() {
       this.expanded = !this.expanded;
+    },
+    resetPriority() {
+      this.priority = 0;
     }
+  },
+  created () {
+    setInterval(() => {
+      this.date = new Date().toDateString();
+      this.time = new Date().toTimeString();
+      this.priority += Number(this.priorityFactor);
+    }, 1000)
   }
 })
 
@@ -86,18 +91,15 @@ var app = new Vue({
         var task = {
           taskText: this.newTaskText
         };
-        //this.tasks.push(task);
 
         this.$pouchdbRefs.prioritytasklist.put('task', task);
 
         this.newTaskText = '';
       },
       onLeftClick(key) {
-        //if(0 < index && index < this.tasks.length) {
         if(key in this.prioritytasklist.task) {
           this.selectedTaskKey = key;
-          //this.newTaskText = this.tasks[index].title;
-          this.newTaskText = this.prioritytasklist.task[key].taskText;
+          //this.newTaskText = this.prioritytasklist.task[key].taskText;
         }
       },
       deleteSelected() {
@@ -106,13 +108,9 @@ var app = new Vue({
         }
       },
       deleteTask(key) {
-        //var task = this.tasks[this.selectedIndex];
-
         var task = this.prioritytasklist.task[key];
 
         this.$pouchdbRefs.prioritytasklist.remove(task);
-
-        //this.tasks.splice(this.selectedIndex, 1);
 
         if(this.selectedTaskKey == key) {
           this.selectedTaskKey = -1;
