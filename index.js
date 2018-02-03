@@ -6,16 +6,22 @@ Vue.component('task-item', {
   // https://medium.com/js-dojo/7-ways-to-define-a-component-template-in-vuejs-c04e0c72900d
   // https://sebastiandedeyne.com/posts/2016/dealing-with-templates-in-vue-20
 
-  // TODO:: add div, margin, padding
+  // TODO::
+  // - display priority
+  // - reset priority button
+  // - priority factor
+  // - increase priority with time * factor
+
   // template literal:
   template: `
     <li v-on:click="onLeftClick()">
-      <textarea v-if="expanded" v-model='title' />
-      <input v-else v-model='title' />
+      <textarea v-if="expanded" v-model='taskText' />
+      <input v-else v-model='taskText' />
       <button v-on:click="$emit('remove')">X</button>
       {{ expanded }}
     </li>
   `,
+
   /*
   // template string:
   template: '\
@@ -27,8 +33,10 @@ Vue.component('task-item', {
     </li>\
   ',
   /**/
+
   // TODO:: save changes
-  props: ['title'],
+  // https://vuejs.org/v2/guide/components.html#Form-Input-Components-using-Custom-Events
+  props: ['taskText'],
   data: function () {
     return {
       expanded: false
@@ -76,7 +84,7 @@ var app = new Vue({
     methods: {
       addNewTask: function () {
         var task = {
-          title: this.newTaskText
+          taskText: this.newTaskText
         };
         //this.tasks.push(task);
 
@@ -89,7 +97,7 @@ var app = new Vue({
         if(key in this.prioritytasklist.task) {
           this.selectedTaskKey = key;
           //this.newTaskText = this.tasks[index].title;
-          this.newTaskText = this.prioritytasklist.task[key].title;
+          this.newTaskText = this.prioritytasklist.task[key].taskText;
         }
       },
       deleteSelected() {

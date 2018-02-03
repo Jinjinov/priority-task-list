@@ -60,7 +60,7 @@
           is="task-item"
           v-for="(task, key) in tasks"
           v-bind:key="task._id"
-          v-bind:title="task.title"
+          v-bind:task-text="task.taskText"
           v-on:remove="deleteTask(key)"
           v-on:click.native="onLeftClick(key)"
         ></li>
