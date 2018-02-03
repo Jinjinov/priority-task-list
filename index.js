@@ -3,9 +3,21 @@
 // task-item
 //-------------------------------------------------------------------------
 Vue.component('task-item', {
-  // TODO:: real html template
+  // https://medium.com/js-dojo/7-ways-to-define-a-component-template-in-vuejs-c04e0c72900d
+  // https://sebastiandedeyne.com/posts/2016/dealing-with-templates-in-vue-20
 
   // TODO:: add div, margin, padding
+  // template literal:
+  template: `
+    <li v-on:click="onLeftClick()">
+      <textarea v-if="expanded" v-model='title' />
+      <input v-else v-model='title' />
+      <button v-on:click="$emit('remove')">X</button>
+      {{ expanded }}
+    </li>
+  `,
+  /*
+  // template string:
   template: '\
     <li v-on:click="onLeftClick()">\
       <textarea v-if="expanded" v-model=\'title\' />\
@@ -14,6 +26,7 @@ Vue.component('task-item', {
       {{ expanded }}\
     </li>\
   ',
+  /**/
   // TODO:: save changes
   props: ['title'],
   data: function () {
