@@ -7,14 +7,14 @@ Vue.component('task-item', {
   // https://sebastiandedeyne.com/posts/2016/dealing-with-templates-in-vue-20
 
   // TODO::
-  // - expanded mode
   // - sort by priority
+  // - reset timestamp
 
   // template literal:
   template: `
     <li>
       <div v-on:click="onLeftClick()">
-        {{ priority }}
+        <p>{{ priority }}</p>
         <textarea v-model='taskText' />
       </div>
       <div v-if="expanded">
