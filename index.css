@@ -3,6 +3,7 @@ input {
     height: 100px;
     margin: 2px;
     padding: 2px;
+    vertical-align: middle;
 }
 
 textarea {
@@ -10,4 +11,5 @@ textarea {
     height: 100px;
     margin: 2px;
     padding: 2px;
+    vertical-align: middle;
 }
