@@ -1,21 +1,8 @@
 
-const Question = {
-  template: '<div>Question {{ $route.params.question }}</div>'
-}
-
-const router = new VueRouter({
-  base: '/PriorityTaskList/',
-  //mode: 'history',
-  routes: [
-    // dynamic segments start with a colon
-    { path: '/:question' }
-  ]
-})
-
 Vue.component('task-item', {
   template: '\
     <li v-on:click="onLeftClick()">\
-      {{ title }}\
+      <input v-model=\'title\'>\
       <button v-on:click="$emit(\'remove\')">X</button>\
       {{ selected }}\
     </li>\
@@ -36,36 +23,12 @@ Vue.component('task-item', {
 // this is the Vue.js app
 var app = new Vue({
     el: '#app',
-    router,
-    watch:{
-      '$route.params': function (newVal, oldVal){
-        var found = false;
-      },
-      '$route.params.question': function(newVal, oldVal){
-        this.question = newVal;
-      }
-    },
     //-------------------------------------------------------------------------
     // data
     //-------------------------------------------------------------------------
     data: {
-      selectedIndex: -1,
-      newTaskText: '',
-      tasks: [
-        {
-          id: 1,
-          title: 'Do the dishes',
-        },
-        {
-          id: 2,
-          title: 'Take out the trash',
-        },
-        {
-          id: 3,
-          title: 'Mow the lawn'
-        }
-      ],
-      nextTaskId: 4
+      selectedTaskKey: -1,
+      newTaskText: ''
     },
     //-------------------------------------------------------------------------
     // pouchdb
@@ -80,14 +43,8 @@ var app = new Vue({
     // computed
     //-------------------------------------------------------------------------
     computed: {
-      categoriesMap() {
-        return this.prioritytasklist.categories;
-      },
-      categories() {
-        return this.prioritytasklist.category;
-      },
-      answers() {
-        return this.prioritytasklist.answer;
+      tasks() {
+        return this.prioritytasklist.task;
       }
     },
     //-------------------------------------------------------------------------
@@ -95,22 +52,42 @@ var app = new Vue({
     //-------------------------------------------------------------------------
     methods: {
       addNewTask: function () {
-        this.tasks.push({
-          id: this.nextTaskId++,
+        var task = {
           title: this.newTaskText
-        })
+        };
+        //this.tasks.push(task);
+
+        this.$pouchdbRefs.prioritytasklist.put('task', task);
+
         this.newTaskText = '';
       },
-      onLeftClick(index) {
-        this.selectedIndex = index;
-        this.newTaskText = this.tasks[index].title;
+      onLeftClick(key) {
+        //if(0 < index && index < this.tasks.length) {
+        if(key in this.prioritytasklist.task) {
+          this.selectedTaskKey = key;
+          //this.newTaskText = this.tasks[index].title;
+          this.newTaskText = this.prioritytasklist.task[key].title;
+        }
       },
       deleteSelected() {
-        if(this.selectedIndex != -1) {
-          this.tasks.splice(this.selectedIndex, 1);
-          this.selectedIndex = -1;
-          this.newTaskText = '';
+        if(this.selectedTaskKey != -1) {
+          this.deleteTask(this.selectedTaskKey);
         }
+      },
+      deleteTask(key) {
+        //var task = this.tasks[this.selectedIndex];
+
+        var task = this.prioritytasklist.task[key];
+
+        this.$pouchdbRefs.prioritytasklist.remove(task);
+
+        //this.tasks.splice(this.selectedIndex, 1);
+
+        if(this.selectedTaskKey == key) {
+          this.selectedTaskKey = -1;
+        }
+
+        this.newTaskText = '';
       }
     },
     beforeCreate(){

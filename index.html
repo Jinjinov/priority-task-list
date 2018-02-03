@@ -43,10 +43,6 @@
 
     <div id="app">
       <br/>
-      <span>route: {{ this.$route.params }}</span>
-      <br/>
-      <router-view></router-view>
-      <br/>
       <input
         v-model="newTaskText"
         v-on:keyup.enter="addNewTask"
@@ -55,14 +51,15 @@
       <br/>
       <button v-on:click="deleteSelected">Delete selected</button>
       <br/>
+      <br/>
       <ul>
         <li
           is="task-item"
-          v-for="(task, index) in tasks"
-          v-bind:key="task.id"
+          v-for="(task, key) in tasks"
+          v-bind:key="task._id"
           v-bind:title="task.title"
-          v-on:remove="tasks.splice(index, 1)"
-          v-on:click.native="onLeftClick(index)"
+          v-on:remove="deleteTask(key)"
+          v-on:click.native="onLeftClick(key)"
         ></li>
       </ul>
     </div>
