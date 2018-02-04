@@ -1,3 +1,21 @@
+//-------------------------------------------------------------------------
+// click-outside
+//-------------------------------------------------------------------------
+Vue.directive('click-outside', {
+  bind: function (el, binding, vnode) {
+    el.event = function (event) {
+      // here I check that click was outside the el and his children
+      if (!(el == event.target || el.contains(event.target))) {
+        // and if it did, call method provided in attribute value
+        vnode.context[binding.expression](event);
+      }
+    };
+    document.body.addEventListener('click', el.event)
+  },
+  unbind: function (el) {
+    document.body.removeEventListener('click', el.event)
+  },
+});
 
 //-------------------------------------------------------------------------
 // task-item
@@ -6,21 +24,22 @@ Vue.component('task-item', {
   // https://medium.com/js-dojo/7-ways-to-define-a-component-template-in-vuejs-c04e0c72900d
   // https://sebastiandedeyne.com/posts/2016/dealing-with-templates-in-vue-20
 
-  // TODO::
-  // - collapse on click outside
-  // - display time since last task activity
-  // - display task activity counter
+  // TODO:: collapse on click outside
+  // https://stackoverflow.com/questions/36170425/detect-click-outside-element/36180348
+  // https://jsfiddle.net/70vm3jrd/1/
 
   // template literal:
   template: `
     <li>
       <div v-on:click="onLeftClick()">
         <p>{{ priority }}</p>
+        <p>{{ timeSinceLastActivity }}</p>
+        <p>{{ activityCounter }}</p>
         <textarea v-model='taskText' />
       </div>
       <div v-if="expanded">
         <input v-model='priorityFactor' />
-        <button v-on:click="resetPriority()">Reset Priority</button>
+        <button v-on:click="onTaskActivity()">Task done</button>
         <button v-on:click="$emit('remove')">Delete</button>
       </div>
     </li>
@@ -34,24 +53,31 @@ Vue.component('task-item', {
       expanded: false,
       priority: 0,
       priorityFactor: 1,
-      lastUpdate: new Date()
+      activityCounter: 0,
+      lastUpdate: new Date(),
+      lastActivity: new Date(),
+      timeSinceLastActivity: new Date()
     }
   },
   methods: {
     onLeftClick() {
       this.expanded = !this.expanded;
     },
-    resetPriority() {
+    onTaskActivity() {
       this.priority = 0;
+      this.lastActivity = new Date();
+      this.activityCounter++;
     }
   },
   created () {
     // TODO:: move to main Vue app
     setInterval(() => {
       var thisUpdate = new Date();
-      var diff = thisUpdate - this.lastUpdate;
-      this.priority += Number(this.priorityFactor) * Math.round(diff / 1000);
+      var sinceLastUpdate = thisUpdate - this.lastUpdate;
+      this.priority += Number(this.priorityFactor) * Math.round(sinceLastUpdate / 1000);
       this.lastUpdate = thisUpdate;
+
+      this.timeSinceLastActivity = Math.round((thisUpdate - this.lastActivity) / 1000);
     }, 1000)
   }
 })
@@ -59,7 +85,7 @@ Vue.component('task-item', {
 //-------------------------------------------------------------------------
 // this is the Vue.js app
 //-------------------------------------------------------------------------
-var app = new Vue({
+new Vue({
     el: '#app',
     //-------------------------------------------------------------------------
     // data
@@ -81,8 +107,8 @@ var app = new Vue({
     // computed
     //-------------------------------------------------------------------------
     computed: {
-      // TODO::
-      // - sort by priority https://vuejs.org/v2/guide/list.html#Displaying-Filtered-Sorted-Results
+      // TODO:: sort by priority
+      // https://vuejs.org/v2/guide/list.html#Displaying-Filtered-Sorted-Results
       tasks() {
         return this.prioritytasklist.task;
       }
