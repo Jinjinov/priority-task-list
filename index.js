@@ -7,8 +7,9 @@ Vue.component('task-item', {
   // https://sebastiandedeyne.com/posts/2016/dealing-with-templates-in-vue-20
 
   // TODO::
-  // - sort by priority
-  // - reset timestamp
+  // - collapse on click outside
+  // - display time since last task activity
+  // - display task activity counter
 
   // template literal:
   template: `
@@ -33,8 +34,7 @@ Vue.component('task-item', {
       expanded: false,
       priority: 0,
       priorityFactor: 1,
-      date: new Date().toDateString(),
-      time: new Date().toTimeString()
+      lastUpdate: new Date()
     }
   },
   methods: {
@@ -46,10 +46,12 @@ Vue.component('task-item', {
     }
   },
   created () {
+    // TODO:: move to main Vue app
     setInterval(() => {
-      this.date = new Date().toDateString();
-      this.time = new Date().toTimeString();
-      this.priority += Number(this.priorityFactor);
+      var thisUpdate = new Date();
+      var diff = thisUpdate - this.lastUpdate;
+      this.priority += Number(this.priorityFactor) * Math.round(diff / 1000);
+      this.lastUpdate = thisUpdate;
     }, 1000)
   }
 })
@@ -79,6 +81,8 @@ var app = new Vue({
     // computed
     //-------------------------------------------------------------------------
     computed: {
+      // TODO::
+      // - sort by priority https://vuejs.org/v2/guide/list.html#Displaying-Filtered-Sorted-Results
       tasks() {
         return this.prioritytasklist.task;
       }
