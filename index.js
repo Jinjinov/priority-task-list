@@ -4,9 +4,9 @@
 Vue.directive('click-outside', {
   bind: function (el, binding, vnode) {
     el.event = function (event) {
-      // here I check that click was outside the el and his children
+      // check that click was outside the el and his children
       if (!(el == event.target || el.contains(event.target))) {
-        // and if it did, call method provided in attribute value
+        // and if it was, call method provided in attribute value
         vnode.context[binding.expression](event);
       }
     };
@@ -24,23 +24,22 @@ Vue.component('task-item', {
   // https://medium.com/js-dojo/7-ways-to-define-a-component-template-in-vuejs-c04e0c72900d
   // https://sebastiandedeyne.com/posts/2016/dealing-with-templates-in-vue-20
 
-  // TODO:: collapse on click outside
   // https://stackoverflow.com/questions/36170425/detect-click-outside-element/36180348
   // https://jsfiddle.net/70vm3jrd/1/
 
-  // template literal:
+  // TODO::
+  // - define Task class
+
+  // https://stackoverflow.com/questions/11805352/floatleft-vs-displayinline-vs-displayinline-block-vs-displaytable-cell
+  // https://stackoverflow.com/questions/15172520/advantages-of-using-displayinline-block-vs-floatleft-in-css
   template: `
-    <li>
+    <li v-click-outside="onClickOutside">
       <div v-on:click="onLeftClick()">
-        <p>{{ priority }}</p>
-        <p>{{ timeSinceLastActivity }}</p>
-        <p>{{ activityCounter }}</p>
+        <p>{{ priority }}</p><p>{{ timeSinceLastActivity }}</p><p>{{ activityCounter }}</p>
         <textarea v-model='taskText' />
       </div>
       <div v-if="expanded">
-        <input v-model='priorityFactor' />
-        <button v-on:click="onTaskActivity()">Task done</button>
-        <button v-on:click="$emit('remove')">Delete</button>
+        <input v-model='priorityFactor' /><button v-on:click="onTaskActivity()">Task done</button><button v-on:click="$emit('remove')">Delete</button>
       </div>
     </li>
   `,
@@ -51,17 +50,22 @@ Vue.component('task-item', {
   data: function () {
     return {
       expanded: false,
+      // Task class -->
       priority: 0,
       priorityFactor: 1,
       activityCounter: 0,
       lastUpdate: new Date(),
       lastActivity: new Date(),
+      // <-- Task class
       timeSinceLastActivity: new Date()
     }
   },
   methods: {
     onLeftClick() {
-      this.expanded = !this.expanded;
+      this.expanded = true;
+    },
+    onClickOutside() {
+      this.expanded = false;
     },
     onTaskActivity() {
       this.priority = 0;
@@ -111,6 +115,9 @@ new Vue({
       // https://vuejs.org/v2/guide/list.html#Displaying-Filtered-Sorted-Results
       tasks() {
         return this.prioritytasklist.task;
+      },
+      tasksByPriority() {
+        return this.prioritytasklist.task.sort((a,b) => a.taskPriority - b.taskPriority);
       }
     },
     //-------------------------------------------------------------------------
@@ -119,7 +126,8 @@ new Vue({
     methods: {
       addNewTask: function () {
         var task = {
-          taskText: this.newTaskText
+          taskText: this.newTaskText,
+          taskPriority: 0
         };
 
         this.$pouchdbRefs.prioritytasklist.put('task', task);

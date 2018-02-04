@@ -44,6 +44,7 @@ div {
 }
 
 p {
+    display: inline-block;
     width: 100px;
     /* height: 100px; */
     margin: 2px;
