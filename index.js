@@ -1,4 +1,18 @@
 //-------------------------------------------------------------------------
+// class Task
+//-------------------------------------------------------------------------
+class Task {
+  constructor(text) {
+    this.text = text;
+    this.priority = 0;
+    this.priorityFactor = 1;
+    this.activityCounter = 0;
+    this.lastUpdate = new Date();
+    this.lastActivity = new Date();
+  }
+}
+
+//-------------------------------------------------------------------------
 // click-outside
 //-------------------------------------------------------------------------
 Vue.directive('click-outside', {
@@ -26,9 +40,6 @@ Vue.component('task-item', {
 
   // https://stackoverflow.com/questions/36170425/detect-click-outside-element/36180348
   // https://jsfiddle.net/70vm3jrd/1/
-
-  // TODO::
-  // - define Task class
 
   // https://stackoverflow.com/questions/11805352/floatleft-vs-displayinline-vs-displayinline-block-vs-displaytable-cell
   // https://stackoverflow.com/questions/15172520/advantages-of-using-displayinline-block-vs-floatleft-in-css
@@ -111,13 +122,16 @@ new Vue({
     // computed
     //-------------------------------------------------------------------------
     computed: {
-      // TODO:: sort by priority
-      // https://vuejs.org/v2/guide/list.html#Displaying-Filtered-Sorted-Results
       tasks() {
         return this.prioritytasklist.task;
       },
+      // https://vuejs.org/v2/guide/list.html#Displaying-Filtered-Sorted-Results
       tasksByPriority() {
-        return this.prioritytasklist.task.sort((a,b) => a.taskPriority - b.taskPriority);
+        var sortable = [];
+        for (var key in this.prioritytasklist.task) {
+            sortable.push(this.prioritytasklist.task[key]);
+        }
+        return sortable.sort((a,b) => a.priority - b.priority);
       }
     },
     //-------------------------------------------------------------------------
@@ -125,10 +139,7 @@ new Vue({
     //-------------------------------------------------------------------------
     methods: {
       addNewTask: function () {
-        var task = {
-          taskText: this.newTaskText,
-          taskPriority: 0
-        };
+        var task = new Task(this.newTaskText);
 
         this.$pouchdbRefs.prioritytasklist.put('task', task);
 
@@ -137,7 +148,6 @@ new Vue({
       onLeftClick(key) {
         if(key in this.prioritytasklist.task) {
           this.selectedTaskKey = key;
-          //this.newTaskText = this.prioritytasklist.task[key].taskText;
         }
       },
       deleteSelected() {
@@ -153,8 +163,6 @@ new Vue({
         if(this.selectedTaskKey == key) {
           this.selectedTaskKey = -1;
         }
-
-        this.newTaskText = '';
       }
     },
     beforeCreate(){

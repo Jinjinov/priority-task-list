@@ -61,11 +61,11 @@
       <ul>
         <li
           is="task-item"
-          v-for="(task, key) in tasks"
+          v-for="task in tasksByPriority"
           v-bind:key="task._id"
-          v-bind:task-text="task.taskText"
-          v-on:remove="deleteTask(key)"
-          v-on:click.native="onLeftClick(key)"
+          v-bind:task-text="task.text"
+          v-on:remove="deleteTask(task._id)"
+          v-on:click.native="onLeftClick(task._id)"
         ></li>
       </ul>
     </div>
