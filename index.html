@@ -62,9 +62,15 @@
         <li
           is="task-item"
           v-for="task in tasksByPriority"
-          v-bind:key="task._id"
-          v-bind:task-text="task.text"
+          :key="task._id"
+          :text.sync="task.text"
+          :priority="task.priority"
+          :priority-factor.sync="task.priorityFactor"
+          :activity-counter="task.activityCounter"
+          :last-update="task.lastUpdate"
+          :last-activity="task.lastActivity"
           v-on:remove="deleteTask(task._id)"
+          v-on:activity="onTaskActivity(task._id)"
           v-on:click.native="onLeftClick(task._id)"
         ></li>
       </ul>

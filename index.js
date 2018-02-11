@@ -47,28 +47,35 @@ Vue.component('task-item', {
     <li v-click-outside="onClickOutside">
       <div v-on:click="onLeftClick()">
         <p>{{ priority }}</p><p>{{ timeSinceLastActivity }}</p><p>{{ activityCounter }}</p>
-        <textarea v-model='taskText' />
+        <textarea :value="text" @input="$emit('update:text', $event.target.value)" />
       </div>
       <div v-if="expanded">
-        <input v-model='priorityFactor' /><button v-on:click="onTaskActivity()">Task done</button><button v-on:click="$emit('remove')">Delete</button>
+        <input :value="priorityFactor" @input="$emit('update:priorityFactor', $event.target.value)" /><button v-on:click="$emit('activity')">Task done</button><button v-on:click="$emit('remove')">Delete</button>
       </div>
     </li>
   `,
 
   // TODO:: save changes
   // https://vuejs.org/v2/guide/components.html#Form-Input-Components-using-Custom-Events
-  props: ['taskText'],
+  // https://vuejs.org/v2/guide/components.html#sync-Modifier
+  // https://medium.com/front-end-hacking/vues-v-model-directive-vs-sync-modifier-d1f83957c57c
+  props: ['text', 'priority', 'priorityFactor', 'activityCounter', 'lastUpdate', 'lastActivity'],
   data: function () {
     return {
-      expanded: false,
-      // Task class -->
-      priority: 0,
-      priorityFactor: 1,
-      activityCounter: 0,
-      lastUpdate: new Date(),
-      lastActivity: new Date(),
-      // <-- Task class
-      timeSinceLastActivity: new Date()
+      expanded: false
+    }
+  },
+  computed: {
+    timeSinceLastActivity() {
+      return Math.round((this.lastUpdate - this.lastActivity) / 1000);
+    }
+  },
+  watch: {
+    text(val, oldval) {
+      this.$emit('update:text', val);
+    },
+    priorityFactor(val, oldval) {
+      this.$emit('update:priorityFactor', val);
     }
   },
   methods: {
@@ -77,23 +84,7 @@ Vue.component('task-item', {
     },
     onClickOutside() {
       this.expanded = false;
-    },
-    onTaskActivity() {
-      this.priority = 0;
-      this.lastActivity = new Date();
-      this.activityCounter++;
     }
-  },
-  created () {
-    // TODO:: move to main Vue app
-    setInterval(() => {
-      var thisUpdate = new Date();
-      var sinceLastUpdate = thisUpdate - this.lastUpdate;
-      this.priority += Number(this.priorityFactor) * Math.round(sinceLastUpdate / 1000);
-      this.lastUpdate = thisUpdate;
-
-      this.timeSinceLastActivity = Math.round((thisUpdate - this.lastActivity) / 1000);
-    }, 1000)
   }
 })
 
@@ -148,6 +139,7 @@ new Vue({
       onLeftClick(key) {
         if(key in this.prioritytasklist.task) {
           this.selectedTaskKey = key;
+          //this.newTaskText = this.prioritytasklist.task[key].text;
         }
       },
       deleteSelected() {
@@ -163,24 +155,45 @@ new Vue({
         if(this.selectedTaskKey == key) {
           this.selectedTaskKey = -1;
         }
+      },
+      onTaskActivity(key) {
+        var task = this.prioritytasklist.task[key];
+
+        task.priority = 0;
+        task.lastActivity = new Date();
+        task.activityCounter++;
+
+        this.$pouchdbRefs.prioritytasklist.update(task);
       }
     },
     beforeCreate(){
-      var found = false; // #1 , vuepouch -> #2
+      // var found = false; // #1 , vuepouch -> #2
     },
     created(){
-      var found = false; // #3
+      // var found = false; // #3
+
+      setInterval(() => {
+        var thisUpdate = new Date();
+
+        for (var key in this.prioritytasklist.task) {
+          var task = this.prioritytasklist.task[key];
+
+          var sinceLastUpdate = thisUpdate - task.lastUpdate;
+          task.priority += Number(task.priorityFactor) * Math.round(sinceLastUpdate / 1000);
+          task.lastUpdate = thisUpdate;
+        }
+      }, 1000);
     },
     beforeMount(){
-      var found = false; // #4 , computed -> #5
+      // var found = false; // #4 , computed -> #5
     },
     mounted(){ // template parsed
-      var found = false; // #6 , vuepouch -> #7 initDB - then
+      // var found = false; // #6 , vuepouch -> #7 initDB - then
     },
     beforeUpdate(){
-      var found = false; // #8
+      // var found = false; // #8
     },
     updated(){ // v-for resolved
-      var found = false; // #9
+      // var found = false; // #9
     }
   });
