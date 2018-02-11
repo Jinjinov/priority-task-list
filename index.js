@@ -59,7 +59,6 @@ Vue.component('task-item', {
     </li>
   `,
 
-  // TODO:: save changes
   // https://vuejs.org/v2/guide/components.html#Form-Input-Components-using-Custom-Events
   // https://vuejs.org/v2/guide/components.html#sync-Modifier
   // https://medium.com/front-end-hacking/vues-v-model-directive-vs-sync-modifier-d1f83957c57c
@@ -74,16 +73,6 @@ Vue.component('task-item', {
       return Math.round((new Date(this.lastUpdate) - new Date(this.lastActivity)) / 1000);
     }
   },
-  /*
-  watch: {
-    text(val, oldval) {
-      this.$emit('update:text', val);
-    },
-    priorityFactor(val, oldval) {
-      this.$emit('update:priorityFactor', val);
-    }
-  },
-  /**/
   methods: {
     onLeftClick() {
       this.expanded = true;
