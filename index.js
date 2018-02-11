@@ -46,11 +46,15 @@ Vue.component('task-item', {
   template: `
     <li v-click-outside="onClickOutside">
       <div v-on:click="onLeftClick()">
-        <p>{{ priority }}</p><p>{{ timeSinceLastActivity }}</p><p>{{ activityCounter }}</p>
+        priority: <p>{{ priority }}</p>
+        time: <p>{{ timeSinceLastActivity }}</p>
+        counter: <p>{{ activityCounter }}</p>
         <textarea :value="text" @input="$emit('update:text', $event.target.value)" />
       </div>
       <div v-if="expanded">
-        <input :value="priorityFactor" @input="$emit('update:priorityFactor', $event.target.value)" /><button v-on:click="$emit('activity')">Task done</button><button v-on:click="$emit('remove')">Delete</button>
+        factor: <input :value="priorityFactor" @input="$emit('update:priority-factor', $event.target.value)" />
+        <button v-on:click="$emit('activity')">Task done</button>
+        <button v-on:click="$emit('remove')">Delete</button>
       </div>
     </li>
   `,
@@ -67,9 +71,10 @@ Vue.component('task-item', {
   },
   computed: {
     timeSinceLastActivity() {
-      return Math.round((this.lastUpdate - this.lastActivity) / 1000);
+      return Math.round((new Date(this.lastUpdate) - new Date(this.lastActivity)) / 1000);
     }
   },
+  /*
   watch: {
     text(val, oldval) {
       this.$emit('update:text', val);
@@ -78,12 +83,16 @@ Vue.component('task-item', {
       this.$emit('update:priorityFactor', val);
     }
   },
+  /**/
   methods: {
     onLeftClick() {
       this.expanded = true;
     },
     onClickOutside() {
-      this.expanded = false;
+      if(this.expanded) {
+        this.expanded = false;
+        this.$emit('save');
+      }
     }
   }
 })
@@ -156,6 +165,11 @@ new Vue({
           this.selectedTaskKey = -1;
         }
       },
+      updateTask(key) {
+        var task = this.prioritytasklist.task[key];
+
+        this.$pouchdbRefs.prioritytasklist.update(task);
+      },
       onTaskActivity(key) {
         var task = this.prioritytasklist.task[key];
 
@@ -178,7 +192,7 @@ new Vue({
         for (var key in this.prioritytasklist.task) {
           var task = this.prioritytasklist.task[key];
 
-          var sinceLastUpdate = thisUpdate - task.lastUpdate;
+          var sinceLastUpdate = thisUpdate - new Date(task.lastUpdate);
           task.priority += Number(task.priorityFactor) * Math.round(sinceLastUpdate / 1000);
           task.lastUpdate = thisUpdate;
         }
