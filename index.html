@@ -42,41 +42,46 @@
   <body>
 
     <div id="app">
-      Add a task:
-      <br/>
-      <input
-        v-model="newTaskText"
-        v-on:keyup.enter="addNewTask"
-        placeholder="Add a task"
-      >
-      <br/>
-      Press Enter to save the task
-      <br/>
-      Selected:
-      <br/>
-      {{ selectedTaskKey }}
-      <br/>
-      <button v-on:click="deleteSelected" :disabled="selectedTaskKey == -1">Delete selected</button>
-      <br/>
-      <ul>
-        <li
-          is="task-item"
-          v-for="task in tasksByPriority"
-          :key="task._id"
-          :text="task.text"
-          @update:text="val => { task.text = val; updateTask(task._id); }"
-          :priority="task.priority"
-          :priority-factor="task.priorityFactor"
-          @update:priority-factor="val => { task.priorityFactor = val; updateTask(task._id); }"
-          :activity-counter="task.activityCounter"
-          :last-update="task.lastUpdate"
-          :last-activity="task.lastActivity"
-          v-on:save="updateTask(task._id)"
-          v-on:remove="deleteTask(task._id)"
-          v-on:activity="onTaskActivity(task._id)"
-          v-on:click.native="onLeftClick(task._id)"
-        ></li>
-      </ul>
+      <div class="content2">
+        <div>
+        Add a task:
+          <br/>
+          <input
+            v-model="newTaskText"
+            v-on:keyup.enter="addNewTask"
+            placeholder="Add a task"
+          >
+          <br/>
+          Press Enter to save the task
+        </div>
+        <br/>
+        <ul>
+          <li
+            is="task-item"
+            v-for="task in tasksByPriority"
+            :key="task._id"
+            :text="task.text"
+            @update:text="val => { task.text = val; updateTask(task._id); }"
+            :priority="task.priority"
+            :priority-factor="task.priorityFactor"
+            @update:priority-factor="val => { task.priorityFactor = val; updateTask(task._id); }"
+            :activity-counter="task.activityCounter"
+            :last-update="task.lastUpdate"
+            :last-activity="task.lastActivity"
+            v-on:outside="clickOutsideTask(task._id)"
+            v-on:remove="deleteTask(task._id)"
+            v-on:activity="onTaskActivity(task._id)"
+            v-on:click.native="onLeftClick(task._id)"
+          ></li>
+        </ul>
+      </div>
+      <footer class="footer2">
+          Selected:
+          <br/>
+          {{ selectedTaskKey }}
+          <br/>
+          <button v-on:click="deleteSelected" :disabled="selectedTaskKey == -1">Delete selected</button>
+      </footer>
     </div>
 
     <script src="https://cdn.jsdelivr.net/gh/pouchdb/pouchdb@6.3.4/dist/pouchdb.min.js"></script>

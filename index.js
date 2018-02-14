@@ -43,13 +43,29 @@ Vue.component('task-item', {
 
   // https://stackoverflow.com/questions/11805352/floatleft-vs-displayinline-vs-displayinline-block-vs-displaytable-cell
   // https://stackoverflow.com/questions/15172520/advantages-of-using-displayinline-block-vs-floatleft-in-css
+
+  // TODO:: disable textarea resize
+  // TODO:: textarea resize with line count
+  // https://github.com/egoist/vue-autosize-textarea
+  // https://github.com/egoist/vue-autosize-textarea/issues/1
+  // https://github.com/mage3k/vue-autosize
+  // https://github.com/Nerdinacan/vue-autosize-textarea
+  // TODO:: remove 3 selected UI controls
+  // TODO:: add task has the same look as task
+  // TODO:: center
+  // TODO:: padding
+  // TODO:: margin
+  // TODO:: shadow
+  // TODO:: css class ?
+  // TODO:: bulma ?
+
   template: `
     <li v-click-outside="onClickOutside">
       <div v-on:click="onLeftClick()">
         priority: <p>{{ priority }}</p>
         time: <p>{{ timeSinceLastActivity }}</p>
         counter: <p>{{ activityCounter }}</p>
-        <textarea :value="text" @input="$emit('update:text', $event.target.value)" />
+        <textarea v-on:onkeyup.native="textAreaAdjust(this)" :value="text" @input="$emit('update:text', $event.target.value)" />
       </div>
       <div v-if="expanded">
         factor: <input :value="priorityFactor" @input="$emit('update:priority-factor', $event.target.value)" />
@@ -80,8 +96,12 @@ Vue.component('task-item', {
     onClickOutside() {
       if(this.expanded) {
         this.expanded = false;
-        this.$emit('save');
+        this.$emit('outside');
       }
+    },
+    textAreaAdjust(o) {
+      o.style.height = "1px";
+      o.style.height = (25+o.scrollHeight)+"px";
     }
   }
 })
@@ -158,6 +178,13 @@ new Vue({
         var task = this.prioritytasklist.task[key];
 
         this.$pouchdbRefs.prioritytasklist.update(task);
+      },
+      clickOutsideTask(key) {
+        this.updateTask(key);
+
+        if(this.selectedTaskKey == key) {
+          this.selectedTaskKey = -1;
+        }
       },
       onTaskActivity(key) {
         var task = this.prioritytasklist.task[key];
