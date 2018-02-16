@@ -44,17 +44,15 @@
     <div id="app">
       <div class="content2">
         <div>
-        Add a task:
-          <br/>
+          <!--
+            TODO:: change input to textarea
+          -->          
           <input
             v-model="newTaskText"
             v-on:keyup.enter="addNewTask"
             placeholder="Add a task"
           >
-          <br/>
-          Press Enter to save the task
         </div>
-        <br/>
         <ul>
           <li
             is="task-item"
@@ -77,9 +75,7 @@
       </div>
       <footer class="footer2">
           Selected:
-          <br/>
           {{ selectedTaskKey }}
-          <br/>
           <button v-on:click="deleteSelected" :disabled="selectedTaskKey == -1">Delete selected</button>
       </footer>
     </div>

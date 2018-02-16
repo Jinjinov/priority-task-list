@@ -53,6 +53,7 @@ Vue.component('task-item', {
   // TODO:: center
   // TODO:: padding
   // TODO:: margin
+  // TODO:: backgroung color
   // TODO:: shadow
   // TODO:: css class ?
   // TODO:: bulma ?
@@ -61,16 +62,20 @@ Vue.component('task-item', {
 
   template: `
     <li v-click-outside="onClickOutside">
-      <div v-on:click="onLeftClick()">
-        priority: <p>{{ priority }}</p>
-        time: <p>{{ timeSinceLastActivity }}</p>
-        counter: <p>{{ activityCounter }}</p>
-        <textarea ref="message" v-on:keyup="textAreaAdjust()" :value="text" @input="$emit('update:text', $event.target.value)" />
-      </div>
-      <div v-if="expanded">
-        factor: <input :value="priorityFactor" @input="$emit('update:priority-factor', $event.target.value)" />
-        <button v-on:click="$emit('activity')">Task done</button>
-        <button v-on:click="$emit('remove')">Delete</button>
+      <div class="task">
+        <div v-on:click="onLeftClick()">
+          <p>
+          priority: {{ priority }}
+          age: {{ timeSinceLastActivity }}
+          #: {{ activityCounter }}
+          </p>
+          <textarea ref="message" v-on:keyup="textAreaAdjust()" :value="text" @input="$emit('update:text', $event.target.value)" />
+        </div>
+        <div v-if="expanded">
+          factor: <input :value="priorityFactor" @input="$emit('update:priority-factor', $event.target.value)" />
+          <button v-on:click="$emit('activity')">Task done</button>
+          <button v-on:click="$emit('remove')">Delete</button>
+        </div>
       </div>
     </li>
   `,
