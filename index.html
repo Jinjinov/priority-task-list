@@ -51,15 +51,11 @@
 
     <div id="app">
       <div class="content2">
-        <div>
+        <div class="task">
           <!--
-            TODO:: change input to textarea
+            TODO:: key Enter doesn't add a new task
           -->          
-          <input
-            v-model="newTaskText"
-            v-on:keyup.enter="addNewTask"
-            placeholder="Add a task"
-          >
+          <textarea v-model="newTaskText" v-on:keyup.enter="addNewTask" placeholder="Add a task"></textarea>
         </div>
         <ul>
           <li

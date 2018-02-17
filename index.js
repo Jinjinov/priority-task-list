@@ -57,6 +57,16 @@ Vue.component('task-item', {
   // TODO:: shadow
   // TODO:: css class ?
   // TODO:: bulma ?
+  // TODO:: resize textarea on load
+  // TODO:: expanded -> move controls to top
+  // TODO:: expanded -> times done becomes button
+  // TODO:: age in DateTime format
+  // TODO:: image for priority
+  // TODO:: image for age
+  // TODO:: image for count
+  // TODO:: image for delete
+  // TODO:: image for factor
+  // TODO:: tooltip text for images
 
   // https://codingexplained.com/coding/front-end/vue-js/accessing-dom-refs
 
