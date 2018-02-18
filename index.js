@@ -12,6 +12,29 @@ class Task {
   }
 }
 
+function getWidthOfText(txt, fontsize, fontname){
+  if(getWidthOfText.c === undefined){
+      getWidthOfText.c=document.createElement('canvas');
+      getWidthOfText.ctx=getWidthOfText.c.getContext('2d');
+  }
+  getWidthOfText.ctx.font = fontsize + ' ' + fontname;
+  return getWidthOfText.ctx.measureText(txt).width;
+}
+
+/*
+function getWidthOfText(txt, fontsize, fontname){
+  if(getWidthOfText.e === undefined){
+      getWidthOfText.e = document.createElement('span');
+      getWidthOfText.e.style.display = "none";
+      document.body.appendChild(getWidthOfText.e);
+  }
+  getWidthOfText.e.style.fontSize = fontsize;
+  getWidthOfText.e.style.fontFamily = fontname;
+  getWidthOfText.e.innerText = txt;
+  return getWidthOfText.e.offsetWidth;
+}
+/**/
+
 //-------------------------------------------------------------------------
 // click-outside
 //-------------------------------------------------------------------------
@@ -53,9 +76,8 @@ Vue.component('task-item', {
   // TODO:: center
   // TODO:: shadow
 
-  // TODO:: expanded -> move controls to top
   // TODO:: expanded -> times done becomes button
-  // TODO:: age in DateTime format
+  // TODO:: age in format: years weeks days + hh:mm:ss
 
   // TODO:: image for priority
   // TODO:: image for age
@@ -70,17 +92,17 @@ Vue.component('task-item', {
     <li v-click-outside="onClickOutside">
       <div class="task">
         <div v-on:click="onLeftClick()">
-          <p>
-          priority: {{ priority }}
+          <span>
+          pri: {{ priority }}
           age: {{ timeSinceLastActivity }}
           #: {{ activityCounter }}
-          </p>
+          </span>
+          <span v-if="expanded">
+            fac: <input ref="factor" v-on:keyup="inputAdjust()" :value="priorityFactor" @input="$emit('update:priority-factor', $event.target.value)" />
+            <button v-on:click="$emit('activity')">Done</button>
+            <button v-on:click="$emit('remove')">Del</button>
+          </span>
           <textarea ref="message" v-on:keyup="textAreaAdjust()" :value="text" @input="$emit('update:text', $event.target.value)" />
-        </div>
-        <div v-if="expanded">
-          factor: <input :value="priorityFactor" @input="$emit('update:priority-factor', $event.target.value)" />
-          <button v-on:click="$emit('activity')">Task done</button>
-          <button v-on:click="$emit('remove')">Delete</button>
         </div>
       </div>
     </li>
@@ -97,12 +119,37 @@ Vue.component('task-item', {
   },
   computed: {
     timeSinceLastActivity() {
-      return Math.round((new Date(this.lastUpdate) - new Date(this.lastActivity)) / 1000);
+      //return new Date(new Date(this.lastUpdate) - new Date(this.lastActivity)).toLocaleTimeString('en-GB');
+      
+      var sec_num = Math.floor((new Date(this.lastUpdate) - new Date(this.lastActivity)) / 1000);
+
+      var days    = Math.floor(sec_num / 86400);
+      var hours   = Math.floor((sec_num % 86400) / 3600);
+      var minutes = Math.floor((sec_num % 3600) / 60);
+      var seconds = Math.floor(sec_num % 60);
+
+      if (hours   < 10) {hours   = "0"+hours;}
+      if (minutes < 10) {minutes = "0"+minutes;}
+      if (seconds < 10) {seconds = "0"+seconds;}
+
+      if(days == 1) {
+        return days+' day '+hours+':'+minutes+':'+seconds;
+      }
+
+      if(days > 1) {
+        return days+' days '+hours+':'+minutes+':'+seconds;
+      }
+
+      return hours+':'+minutes+':'+seconds;
     }
   },
   methods: {
     onLeftClick() {
       this.expanded = true;
+
+      this.$nextTick(() => {
+        this.inputAdjust();
+     })
     },
     onClickOutside() {
       if(this.expanded) {
@@ -114,6 +161,14 @@ Vue.component('task-item', {
       var o = this.$refs.message;
       o.style.height = "1px";
       o.style.height = (20+o.scrollHeight)+"px";
+    },
+    inputAdjust() {
+      var o = this.$refs.factor;
+      o.style.minWidth = "20px";
+      var style = window.getComputedStyle(o, null);
+      var size = style.getPropertyValue('font-size');
+      var font = style.getPropertyValue('font-family');
+      o.style.width = getWidthOfText(o.value, size, font)+5+"px";
     }
   },
   mounted(){
