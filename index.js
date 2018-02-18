@@ -76,7 +76,6 @@ Vue.component('task-item', {
   // TODO:: center
   // TODO:: shadow
 
-  // TODO:: expanded -> times done becomes button
   // TODO:: age in format: years weeks days + hh:mm:ss
 
   // TODO:: image for priority
@@ -92,14 +91,12 @@ Vue.component('task-item', {
     <li v-click-outside="onClickOutside">
       <div class="task">
         <div v-on:click="onLeftClick()">
-          <span>
-          pri: {{ priority }}
-          age: {{ timeSinceLastActivity }}
-          #: {{ activityCounter }}
-          </span>
+          <span>pri: {{ priority }}</span>
+          <span>age: {{ timeSinceLastActivity }}</span>
+          <span v-if="!expanded">{{ activityCounter }}x</span>
           <span v-if="expanded">
             fac: <input ref="factor" v-on:keyup="inputAdjust()" :value="priorityFactor" @input="$emit('update:priority-factor', $event.target.value)" />
-            <button v-on:click="$emit('activity')">Done</button>
+            <button v-on:click="$emit('activity')">{{ activityCounter }}x</button>
             <button v-on:click="$emit('remove')">Del</button>
           </span>
           <textarea ref="message" v-on:keyup="textAreaAdjust()" :value="text" @input="$emit('update:text', $event.target.value)" />
