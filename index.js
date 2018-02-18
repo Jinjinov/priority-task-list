@@ -51,16 +51,12 @@ Vue.component('task-item', {
 
   // TODO:: "add task" has the same look as "task"
   // TODO:: center
-  // TODO:: padding
-  // TODO:: margin
-  // TODO:: backgroung color
   // TODO:: shadow
-  // TODO:: css class ?
-  // TODO:: bulma ?
-  // TODO:: resize textarea on load
+
   // TODO:: expanded -> move controls to top
   // TODO:: expanded -> times done becomes button
   // TODO:: age in DateTime format
+
   // TODO:: image for priority
   // TODO:: image for age
   // TODO:: image for count
@@ -119,6 +115,9 @@ Vue.component('task-item', {
       o.style.height = "1px";
       o.style.height = (20+o.scrollHeight)+"px";
     }
+  },
+  mounted(){
+    this.textAreaAdjust();
   }
 })
 
