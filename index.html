@@ -48,14 +48,16 @@
   </head>
 
   <body>
-
+    <!--
+    The JSON standard specifies that all key/value pairs should be in double quotes.
+    -->          
     <div id="app">
       <div class="content2">
         <div class="task">
           <!--
-            TODO:: key Enter doesn't add a new task
+            TODO:: "add task" has the same look as "task"
           -->          
-          <textarea v-model="newTaskText" v-on:keyup.enter="addNewTask" placeholder="Add a task"></textarea>
+          <textarea v-model="newTaskText" v-click-outside="addNewTask" placeholder="Add a task"></textarea>
         </div>
         <ul>
           <li

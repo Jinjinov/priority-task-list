@@ -1,3 +1,5 @@
+// The JSON standard specifies that all key/value pairs should be in double quotes.
+
 //-------------------------------------------------------------------------
 // class Task
 //-------------------------------------------------------------------------
@@ -72,11 +74,8 @@ Vue.component('task-item', {
   // https://github.com/mage3k/vue-autosize
   // https://github.com/Nerdinacan/vue-autosize-textarea
 
-  // TODO:: "add task" has the same look as "task"
   // TODO:: center
   // TODO:: shadow
-
-  // TODO:: age in format: years weeks days + hh:mm:ss
 
   // TODO:: image for priority
   // TODO:: image for age
@@ -120,7 +119,8 @@ Vue.component('task-item', {
       
       var sec_num = Math.floor((new Date(this.lastUpdate) - new Date(this.lastActivity)) / 1000);
 
-      var days    = Math.floor(sec_num / 86400);
+      var weeks   = Math.floor(sec_num / 604800);
+      var days    = Math.floor((sec_num % 604800) / 86400);
       var hours   = Math.floor((sec_num % 86400) / 3600);
       var minutes = Math.floor((sec_num % 3600) / 60);
       var seconds = Math.floor(sec_num % 60);
@@ -129,15 +129,25 @@ Vue.component('task-item', {
       if (minutes < 10) {minutes = "0"+minutes;}
       if (seconds < 10) {seconds = "0"+seconds;}
 
+      var time = hours+':'+minutes+':'+seconds;
+
       if(days == 1) {
-        return days+' day '+hours+':'+minutes+':'+seconds;
+        time = days+' day '+time;
       }
 
       if(days > 1) {
-        return days+' days '+hours+':'+minutes+':'+seconds;
+        time = days+' days '+time;
       }
 
-      return hours+':'+minutes+':'+seconds;
+      if(weeks == 1) {
+        time = weeks+' week '+time;
+      }
+
+      if(weeks > 1) {
+        time = weeks+' weeks '+time;
+      }
+
+      return time;
     }
   },
   methods: {
@@ -215,11 +225,15 @@ new Vue({
     //-------------------------------------------------------------------------
     methods: {
       addNewTask: function () {
+        if(this.newTaskText == "") {
+          return;
+        }
+
         var task = new Task(this.newTaskText);
 
         this.$pouchdbRefs.prioritytasklist.put('task', task);
 
-        this.newTaskText = '';
+        this.newTaskText = "";
       },
       onLeftClick(key) {
         if(key in this.prioritytasklist.task) {
