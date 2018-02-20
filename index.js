@@ -217,7 +217,7 @@ new Vue({
         for (var key in this.prioritytasklist.task) {
             sortable.push(this.prioritytasklist.task[key]);
         }
-        return sortable.sort((a,b) => a.priority - b.priority);
+        return sortable.sort((a,b) => b.priority - a.priority);
       }
     },
     //-------------------------------------------------------------------------

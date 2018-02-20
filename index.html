@@ -53,10 +53,27 @@
     -->          
     <div id="app">
       <div class="content2">
+          <!--
+            <li v-click-outside="onClickOutside">
+              <div class="task">
+                <div v-on:click="onLeftClick()">
+                  <span>pri: {{ priority }}</span>
+                  <span>age: {{ timeSinceLastActivity }}</span>
+                  <span v-if="!expanded">{{ activityCounter }}x</span>
+                  <span v-if="expanded">
+                    fac: <input ref="factor" v-on:keyup="inputAdjust()" :value="priorityFactor" @input="$emit('update:priority-factor', $event.target.value)" />
+                    <button v-on:click="$emit('activity')">{{ activityCounter }}x</button>
+                    <button v-on:click="$emit('remove')">Del</button>
+                  </span>
+                  <textarea ref="message" v-on:keyup="textAreaAdjust()" :value="text" @input="$emit('update:text', $event.target.value)" />
+                </div>
+              </div>
+            </li>
+          -->
         <div class="task">
           <!--
             TODO:: "add task" has the same look as "task"
-          -->          
+          -->
           <textarea v-model="newTaskText" v-click-outside="addNewTask" placeholder="Add a task"></textarea>
         </div>
         <ul>
