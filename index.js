@@ -4,10 +4,10 @@
 // class Task
 //-------------------------------------------------------------------------
 class Task {
-  constructor(text) {
+  constructor(text, factor) {
     this.text = text;
     this.priority = 0;
-    this.priorityFactor = 1;
+    this.priorityFactor = factor;
     this.activityCounter = 0;
     this.lastUpdate = new Date();
     this.lastActivity = new Date();
@@ -88,18 +88,16 @@ Vue.component('task-item', {
 
   template: `
     <li v-click-outside="onClickOutside">
-      <div class="task">
-        <div v-on:click="onLeftClick()">
-          <span>pri: {{ priority }}</span>
-          <span>age: {{ timeSinceLastActivity }}</span>
-          <span v-if="!expanded">{{ activityCounter }}x</span>
-          <span v-if="expanded">
-            fac: <input ref="factor" v-on:keyup="inputAdjust()" :value="priorityFactor" @input="$emit('update:priority-factor', $event.target.value)" />
-            <button v-on:click="$emit('activity')">{{ activityCounter }}x</button>
-            <button v-on:click="$emit('remove')">Del</button>
-          </span>
-          <textarea ref="message" v-on:keyup="textAreaAdjust()" :value="text" @input="$emit('update:text', $event.target.value)" />
-        </div>
+      <div v-on:click="onLeftClick()" class="task">
+        <span>pri: {{ priority }}</span>
+        <span>age: {{ timeSinceLastActivity }}</span>
+        <span v-if="!expanded">{{ activityCounter }}x</span>
+        <span v-if="expanded">
+          fac: <input ref="factor" v-on:keyup="inputAdjust()" :value="priorityFactor" @input="$emit('update:priority-factor', $event.target.value)" />
+          <button v-on:click="$emit('activity')">{{ activityCounter }}x</button>
+          <button v-on:click="$emit('remove')">Del</button>
+        </span>
+        <textarea ref="message" v-on:keyup="textAreaAdjust()" :value="text" @input="$emit('update:text', $event.target.value)"></textarea>
       </div>
     </li>
   `,
@@ -193,7 +191,9 @@ new Vue({
     //-------------------------------------------------------------------------
     data: {
       selectedTaskKey: -1,
-      newTaskText: ''
+      newTaskText: '',
+      newTaskFactor: 1,
+      expanded: false
     },
     //-------------------------------------------------------------------------
     // pouchdb
@@ -224,18 +224,43 @@ new Vue({
     // methods
     //-------------------------------------------------------------------------
     methods: {
+      textAreaAdjust() {
+        var o = this.$refs.message;
+        o.style.height = "1px";
+        o.style.height = (20+o.scrollHeight)+"px";
+      },
+      inputAdjust() {
+        var o = this.$refs.factor;
+        o.style.minWidth = "20px";
+        var style = window.getComputedStyle(o, null);
+        var size = style.getPropertyValue('font-size');
+        var font = style.getPropertyValue('font-family');
+        o.style.width = getWidthOfText(o.value, size, font)+5+"px";
+      },
       addNewTask: function () {
+        if(this.expanded) {
+          this.expanded = false;
+        }
+        
         if(this.newTaskText == "") {
           return;
         }
 
-        var task = new Task(this.newTaskText);
+        var task = new Task(this.newTaskText, this.newTaskFactor);
 
         this.$pouchdbRefs.prioritytasklist.put('task', task);
 
         this.newTaskText = "";
+        this.newTaskFactor = 1;
       },
-      onLeftClick(key) {
+      onLeftClick() {
+        this.expanded = true;
+  
+        this.$nextTick(() => {
+          this.inputAdjust();
+       })
+      },
+      onLeftClickTask(key) {
         if(key in this.prioritytasklist.task) {
           this.selectedTaskKey = key;
           //this.newTaskText = this.prioritytasklist.task[key].text;
@@ -300,6 +325,9 @@ new Vue({
     },
     mounted(){ // template parsed
       // var found = false; // #6 , vuepouch -> #7 initDB - then
+
+      //this.inputAdjust();
+      this.textAreaAdjust();
     },
     beforeUpdate(){
       // var found = false; // #8

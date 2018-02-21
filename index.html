@@ -53,29 +53,14 @@
     -->          
     <div id="app">
       <div class="content2">
-          <!--
-            <li v-click-outside="onClickOutside">
-              <div class="task">
-                <div v-on:click="onLeftClick()">
-                  <span>pri: {{ priority }}</span>
-                  <span>age: {{ timeSinceLastActivity }}</span>
-                  <span v-if="!expanded">{{ activityCounter }}x</span>
-                  <span v-if="expanded">
-                    fac: <input ref="factor" v-on:keyup="inputAdjust()" :value="priorityFactor" @input="$emit('update:priority-factor', $event.target.value)" />
-                    <button v-on:click="$emit('activity')">{{ activityCounter }}x</button>
-                    <button v-on:click="$emit('remove')">Del</button>
-                  </span>
-                  <textarea ref="message" v-on:keyup="textAreaAdjust()" :value="text" @input="$emit('update:text', $event.target.value)" />
-                </div>
-              </div>
-            </li>
-          -->
-        <div class="task">
-          <!--
-            TODO:: "add task" has the same look as "task"
-          -->
-          <textarea v-model="newTaskText" v-click-outside="addNewTask" placeholder="Add a task"></textarea>
+
+        <div v-on:click="onLeftClick()" v-click-outside="addNewTask" class="task">
+          <span v-if="expanded">
+            fac: <input ref="factor" v-on:keyup="inputAdjust()" v-model="newTaskFactor" />
+          </span>
+          <textarea ref="message" v-on:keyup="textAreaAdjust()" v-model="newTaskText" placeholder="Add a task"></textarea>
         </div>
+
         <ul>
           <li
             is="task-item"
@@ -92,7 +77,7 @@
             v-on:outside="clickOutsideTask(task._id)"
             v-on:remove="deleteTask(task._id)"
             v-on:activity="onTaskActivity(task._id)"
-            v-on:click.native="onLeftClick(task._id)"
+            v-on:click.native="onLeftClickTask(task._id)"
           ></li>
         </ul>
       </div>
