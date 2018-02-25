@@ -77,6 +77,11 @@ Vue.component('task-item', {
   // TODO:: center
   // TODO:: shadow
 
+  // TODO:: update github readme
+  // TODO:: compact mode - all in one row, Enter for next task + arrows
+  // TODO:: mini PC -> server
+  // TODO:: Google Keep -> github TODO
+
   // TODO:: image for priority
   // TODO:: image for age
   // TODO:: image for count
