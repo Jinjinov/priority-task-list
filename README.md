@@ -10,10 +10,6 @@ https://github.com/sadick254/vuepouch
 
 https://github.com/apache/couchdb
 
-https://developers.google.com/web/progressive-web-apps/
-
-https://www.asp.net/single-page-application
-
 ## Why another "Task List" when there are already more than 30 others out there?
 
 Many other task lists allow you to schedule a repeating task:
@@ -28,8 +24,8 @@ If you skip the task, you will just get another alert in 2 days and if you skip 
 
 ## Features:
 
-- single page application
-- progressive web app
+- single page application - https://www.asp.net/single-page-application
+- progressive web app - https://developers.google.com/web/progressive-web-apps/
 - works offline
 - auto sync online
 - icon and shortcut for mobile phones
@@ -46,8 +42,8 @@ If you skip the task, you will just get another alert in 2 days and if you skip 
 - repeat interval
 - scheduled time / date
 - compact mode - one row per task
-- vue-linkify
-- vue-authenticate
-- one database per user
+- vue-linkify - https://github.com/phanan/vue-linkify
+- vue-authenticate - https://github.com/dgrubelic/vue-authenticate
+- one database per user - https://gist.github.com/nolanlawson/9676093
 - labels / groups with base priority offset
 - suggested priority factor based on frequency
