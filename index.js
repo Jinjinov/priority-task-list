@@ -76,11 +76,54 @@ Vue.component('task-item', {
 
   // TODO:: center
   // TODO:: shadow
+  // TODO:: soft colors
 
-  // TODO:: update github readme
+  // TODO:: - sign in: using Google, Facebook, Twitter, ...
+  // TODO:: - https://github.com/websanova/vue-auth
+  // TODO:: X - https://github.com/auth0-blog/vue-jwt-authentication - NodeJS, JSON Web Token
+  // TODO:: - https://github.com/dgrubelic/vue-authenticate
+
+  // TODO:: one database per user - https://gist.github.com/nolanlawson/9676093
+
+  // TODO:: repeat interval: fixed interval
+  // TODO:: scheduled time: time in day / day in week / day in month / day in year
+  // TODO:: fixed date
+  // TODO:: task: active / not active
+  // TODO:: - duration is more important: sleep, work - scheduled time
+  // TODO:: - ‎number of repetitions is more important: brush teeth, shower, shave - time elapsed since last repetition
+
+  // TODO:: groups with base priority offset: y = k * x + n
+  // - sleep / rest
+  // - work
+  // - groom
+  // - cook / eat
+  // - chores
+  // - body
+  // - mind
+  // - relax / enjoy
+
+  // TODO:: counter of minutes spent on task
+  // TODO:: detailed first step plan: what, when, where, who, why, how, ...
+
+  // TODO:: completed: too soon / on time / too late --> auto priority adjustment
+  // TODO:: suggested priority
+
+  // TODO:: parse URL
+  // https://github.com/SoapBox/linkifyjs
+  // https://github.com/phanan/vue-linkify
+  // https://github.com/bryanwoods/autolink-js/blob/master/autolink-min.js
+  // https://github.com/alexcorvi/anchorme.js/blob/gh-pages/dist-browser/anchorme.min.js
+  // https://github.com/nfrasser/linkify-shim/blob/master/linkify.min.js
+  // https://github.com/gregjacobs/Autolinker.js/blob/master/dist/Autolinker.min.js
+  // https://github.com/ljosa/urlize.js/blob/master/urlize.js
+  
+  // TODO:: update github Projects
+  // TODO:: update github Wiki
+  // TODO:: update github Insights / Community
+  // TODO:: update github Pages -> demo version
+
   // TODO:: compact mode - all in one row, Enter for next task + arrows
   // TODO:: mini PC -> server
-  // TODO:: Google Keep -> github TODO
 
   // TODO:: image for priority
   // TODO:: image for age
