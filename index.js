@@ -85,10 +85,10 @@ Vue.component('task-item', {
 
   // TODO:: one database per user - https://gist.github.com/nolanlawson/9676093
 
+  // TODO:: task: active / not active
   // TODO:: repeat interval: fixed interval
   // TODO:: scheduled time: time in day / day in week / day in month / day in year
   // TODO:: fixed date
-  // TODO:: task: active / not active
   // - duration is more important: sleep, work - scheduled time
   // - ‎number of repetitions is more important: brush teeth, shower, shave - time elapsed since last repetition
 
@@ -102,9 +102,9 @@ Vue.component('task-item', {
   // - mind
   // - relax / enjoy
 
-  // TODO:: counter of minutes spent on task
   // TODO:: detailed first step plan: what, when, where, who, why, how, ...
-
+  
+  // TODO:: counter of minutes spent on task
   // TODO:: completed: too soon / on time / too late --> auto priority adjustment
   // TODO:: suggested priority
 
