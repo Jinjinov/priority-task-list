@@ -78,10 +78,10 @@ Vue.component('task-item', {
   // TODO:: shadow
   // TODO:: soft colors
 
-  // TODO:: - sign in: using Google, Facebook, Twitter, ...
-  // TODO:: - https://github.com/websanova/vue-auth
-  // TODO:: X - https://github.com/auth0-blog/vue-jwt-authentication - NodeJS, JSON Web Token
-  // TODO:: - https://github.com/dgrubelic/vue-authenticate
+  // TODO:: sign in: using Google, Facebook, Twitter, ...
+  // - https://github.com/websanova/vue-auth
+  // - https://github.com/dgrubelic/vue-authenticate
+  // X - https://github.com/auth0-blog/vue-jwt-authentication - NodeJS, JSON Web Token
 
   // TODO:: one database per user - https://gist.github.com/nolanlawson/9676093
 
@@ -89,8 +89,8 @@ Vue.component('task-item', {
   // TODO:: scheduled time: time in day / day in week / day in month / day in year
   // TODO:: fixed date
   // TODO:: task: active / not active
-  // TODO:: - duration is more important: sleep, work - scheduled time
-  // TODO:: - ‎number of repetitions is more important: brush teeth, shower, shave - time elapsed since last repetition
+  // - duration is more important: sleep, work - scheduled time
+  // - ‎number of repetitions is more important: brush teeth, shower, shave - time elapsed since last repetition
 
   // TODO:: groups with base priority offset: y = k * x + n
   // - sleep / rest
