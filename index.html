@@ -45,7 +45,7 @@
     34 kb - <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mini.css/2.3.7/mini-sucroa.min.css">
     -->
   
-  <link href="index.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="index.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 
   </head>
 
@@ -53,13 +53,13 @@
     <!--
     The JSON standard specifies that all key/value pairs should be in double quotes.
     -->
-    <div id="app" class="tasks">
+    <div id="app" class="tasks-vue-app">
       <!--      
       <div class="content2">
       -->        
         <div v-on:click="onLeftClick()" v-click-outside="addNewTask" class="task">
-          <div class="top">
-            <span v-if="expanded">fac: <input ref="factor" v-on:keyup="inputAdjust()" v-model="newTaskFactor" /></span>
+          <div class="task-top-row">
+            <span v-if="expanded" class="task-top-row-box">fac: <input ref="factor" v-on:keyup="inputAdjust()" v-model="newTaskFactor" /></span>
           </div>
           <textarea ref="message" v-on:keyup="textAreaAdjust()" v-model="newTaskText" placeholder="Add a task"></textarea>
         </div>

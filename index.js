@@ -135,11 +135,11 @@ Vue.component('task-item', {
 
   template: `
     <div v-on:click="onLeftClick()" v-click-outside="onClickOutside" class="task">
-      <div class="top">
-        <span>pri: {{ priority }}</span>
-        <span>age: {{ timeSinceLastActivity }}</span>
-        <span v-if="!expanded">{{ activityCounter }}x</span>
-        <span v-if="expanded">fac: <input ref="factor" v-on:keyup="inputAdjust()" :value="priorityFactor" @input="$emit('update:priority-factor', $event.target.value)" /></span>
+      <div class="task-top-row">
+        <span class="task-top-row-box">pri: {{ priority }}</span>
+        <span class="task-top-row-box">age: {{ timeSinceLastActivity }}</span>
+        <span v-if="!expanded" class="task-top-row-box">{{ activityCounter }}x</span>
+        <span v-if="expanded" class="factor task-top-row-box">fac: <input ref="factor" v-on:keyup="inputAdjust()" :value="priorityFactor" @input="$emit('update:priority-factor', $event.target.value)" /></span>
         <button v-if="expanded" v-on:click="$emit('activity')">{{ activityCounter }}x</button>
         <button v-if="expanded" v-on:click="$emit('remove')">Del</button>
       </div>

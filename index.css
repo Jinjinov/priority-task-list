@@ -22,27 +22,17 @@ input {
     border: none;
 }
 
-span {
+.task-top-row-box {
     display: inline-block;
     padding: 3px 5px;
     background-color: gainsboro;
 }
 
-ul {
-    padding: 0;
-    list-style-type: none;
+.factor.task-top-row-box {
+    padding: 2px 5px;
 }
 
-.content2 {
-    min-height: calc(100vh - 94px);
-    padding: 20px 20px 0 20px;
-}
-.footer2 {
-    height: 60px;
-    padding: 0 20px 0 20px;
-}
-
-.top {
+.task-top-row {
     margin-bottom: 5px;
 }
 .task {
@@ -54,9 +44,24 @@ ul {
     background-color: silver;
     box-sizing: border-box;
 }
-.tasks {
+.tasks-vue-app {
     min-height: 100%;
     padding: 0 10px;
     background-color: gray;
     box-sizing: border-box;
 }
+
+/*
+ul {
+    padding: 0;
+    list-style-type: none;
+}
+.content2 {
+    min-height: calc(100vh - 94px);
+    padding: 20px 20px 0 20px;
+}
+.footer2 {
+    height: 60px;
+    padding: 0 20px 0 20px;
+}
+*/
