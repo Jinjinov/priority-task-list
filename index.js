@@ -136,14 +136,14 @@ Vue.component('task-item', {
   template: `
     <li v-click-outside="onClickOutside">
       <div v-on:click="onLeftClick()" class="task">
-        <span>pri: {{ priority }}</span>
-        <span>age: {{ timeSinceLastActivity }}</span>
-        <span v-if="!expanded">{{ activityCounter }}x</span>
-        <span v-if="expanded">
-          fac: <input ref="factor" v-on:keyup="inputAdjust()" :value="priorityFactor" @input="$emit('update:priority-factor', $event.target.value)" />
-        </span>
-        <button v-if="expanded" v-on:click="$emit('activity')">{{ activityCounter }}x</button>
-        <button v-if="expanded" v-on:click="$emit('remove')">Del</button>
+        <div class="top">
+          <span>pri: {{ priority }}</span>
+          <span>age: {{ timeSinceLastActivity }}</span>
+          <span v-if="!expanded">{{ activityCounter }}x</span>
+          <span v-if="expanded">fac: <input ref="factor" v-on:keyup="inputAdjust()" :value="priorityFactor" @input="$emit('update:priority-factor', $event.target.value)" /></span>
+          <button v-if="expanded" v-on:click="$emit('activity')">{{ activityCounter }}x</button>
+          <button v-if="expanded" v-on:click="$emit('remove')">Del</button>
+        </div>
         <textarea ref="message" v-on:keyup="textAreaAdjust()" :value="text" @input="$emit('update:text', $event.target.value)"></textarea>
       </div>
     </li>
