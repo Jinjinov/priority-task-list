@@ -58,15 +58,13 @@
       <div class="content2">
       -->        
         <div v-on:click="onLeftClick()" v-click-outside="addNewTask" class="task">
-          <span v-if="expanded">
-            fac: <input ref="factor" v-on:keyup="inputAdjust()" v-model="newTaskFactor" />
-          </span>
+          <div class="top">
+            <span v-if="expanded">fac: <input ref="factor" v-on:keyup="inputAdjust()" v-model="newTaskFactor" /></span>
+          </div>
           <textarea ref="message" v-on:keyup="textAreaAdjust()" v-model="newTaskText" placeholder="Add a task"></textarea>
-        </div><ul>
-          <li
-            is="task-item"
-            v-for="task in tasksByPriority"
-            :key="task._id"
+        </div>
+        <div v-for="task in tasksByPriority" :key="task._id">
+          <task-item
             :text="task.text"
             @update:text="val => { task.text = val; }"
             :priority="task.priority"
@@ -79,8 +77,8 @@
             v-on:remove="deleteTask(task._id)"
             v-on:activity="onTaskActivity(task._id)"
             v-on:click.native="onLeftClickTask(task._id)"
-          ></li>
-        </ul>
+          ></task-item>
+        </div>
       <!--
       </div>
       <footer class="footer2">
