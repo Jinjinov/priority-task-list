@@ -74,9 +74,9 @@ Vue.component('task-item', {
   // https://github.com/mage3k/vue-autosize
   // https://github.com/Nerdinacan/vue-autosize-textarea
 
-  // TODO:: center
-  // TODO:: shadow
-  // TODO:: soft colors
+  // TODO:: # margin, padding, font size
+  // TODO:: # shadow
+  // TODO:: # soft colors
 
   // TODO:: sign in: using Google, Facebook, Twitter, ...
   // - https://github.com/websanova/vue-auth
@@ -85,7 +85,7 @@ Vue.component('task-item', {
 
   // TODO:: one database per user - https://gist.github.com/nolanlawson/9676093
 
-  // TODO:: task: active / not active
+  // TODO:: #0.1 task: active / not active
   // TODO:: repeat interval: fixed interval
   // TODO:: scheduled time: time in day / day in week / day in month / day in year
   // TODO:: fixed date
@@ -108,7 +108,7 @@ Vue.component('task-item', {
   // TODO:: completed: too soon / on time / too late --> auto priority adjustment
   // TODO:: suggested priority
 
-  // TODO:: parse URL
+  // TODO:: #0.3 parse URL
   // https://github.com/SoapBox/linkifyjs
   // https://github.com/phanan/vue-linkify
   // https://github.com/bryanwoods/autolink-js/blob/master/autolink-min.js
@@ -122,15 +122,14 @@ Vue.component('task-item', {
   // TODO:: update github Insights / Community
   // TODO:: update github Pages -> demo version
 
-  // TODO:: compact mode - all in one row, Enter for next task + arrows
-  // TODO:: mini PC -> server
+  // TODO:: #0.2 compact mode - all in one row, Enter for next task + arrows
 
-  // TODO:: image for priority
-  // TODO:: image for age
-  // TODO:: image for count
-  // TODO:: image for delete
-  // TODO:: image for factor
-  // TODO:: tooltip text for images
+  // TODO:: # image for priority
+  // TODO:: # image for age
+  // TODO:: # image for count
+  // TODO:: # image for delete
+  // TODO:: # image for factor
+  // TODO:: # tooltip text for images
 
   // https://codingexplained.com/coding/front-end/vue-js/accessing-dom-refs
 
@@ -142,9 +141,9 @@ Vue.component('task-item', {
         <span v-if="!expanded">{{ activityCounter }}x</span>
         <span v-if="expanded">
           fac: <input ref="factor" v-on:keyup="inputAdjust()" :value="priorityFactor" @input="$emit('update:priority-factor', $event.target.value)" />
-          <button v-on:click="$emit('activity')">{{ activityCounter }}x</button>
-          <button v-on:click="$emit('remove')">Del</button>
         </span>
+        <button v-if="expanded" v-on:click="$emit('activity')">{{ activityCounter }}x</button>
+        <button v-if="expanded" v-on:click="$emit('remove')">Del</button>
         <textarea ref="message" v-on:keyup="textAreaAdjust()" :value="text" @input="$emit('update:text', $event.target.value)"></textarea>
       </div>
     </li>
@@ -249,7 +248,7 @@ new Vue({
     pouchdb: {
       prioritytasklist: {
         localDB: "prioritytasklist",
-        remoteURL: "http://127.0.0.1:5984/prioritytasklist"
+        remoteURL: "http://93.103.155.251:5984/prioritytasklist"
       }
     },
     //-------------------------------------------------------------------------

@@ -50,18 +50,17 @@
   <body>
     <!--
     The JSON standard specifies that all key/value pairs should be in double quotes.
-    -->          
-    <div id="app">
+    -->
+    <div id="app" class="tasks">
+      <!--      
       <div class="content2">
-
+      -->        
         <div v-on:click="onLeftClick()" v-click-outside="addNewTask" class="task">
           <span v-if="expanded">
             fac: <input ref="factor" v-on:keyup="inputAdjust()" v-model="newTaskFactor" />
           </span>
           <textarea ref="message" v-on:keyup="textAreaAdjust()" v-model="newTaskText" placeholder="Add a task"></textarea>
-        </div>
-
-        <ul>
+        </div><ul>
           <li
             is="task-item"
             v-for="task in tasksByPriority"
@@ -80,12 +79,14 @@
             v-on:click.native="onLeftClickTask(task._id)"
           ></li>
         </ul>
+      <!--
       </div>
       <footer class="footer2">
           Selected:
           {{ selectedTaskKey }}
           <button v-on:click="deleteSelected" :disabled="selectedTaskKey == -1">Delete selected</button>
       </footer>
+      -->
     </div>
 
     <script src="https://cdn.jsdelivr.net/gh/pouchdb/pouchdb@6.3.4/dist/pouchdb.min.js"></script>
