@@ -137,23 +137,23 @@ Vue.component('task-item', {
     <div v-on:click="onLeftClick()" v-click-outside="onClickOutside" class="task">
       <div class="task-top-row">
         <span class="task-top-row-box">
-          <img src="icons/priority.png" alt="Task priority" height="20" width="20"> {{ priority }}
+          <img src="icons/priority.png" alt="Task priority" title="Task priority" height="20" width="20"> {{ priority }}
         </span>
         <span class="task-top-row-box">
-          <img src="icons/age.png" alt="Time since task was last completed" height="20" width="20"> {{ timeSinceLastActivity }}
+          <img src="icons/age.png" alt="Time since task was last completed" title="Time since task was last completed" height="20" width="20"> {{ timeSinceLastActivity }}
         </span>
         <span v-if="!expanded" class="task-top-row-box">
-          <img src="icons/count.png" alt="Number of times task was completed" height="20" width="20">{{ activityCounter }}x
+          <img src="icons/count.png" alt="Number of times task was completed" title="Number of times task was completed" height="20" width="20">{{ activityCounter }}x
         </span>
         <span v-if="expanded" class="task-top-row-box">
-          <img src="icons/increase.png" alt="Task priority increase" height="20" width="20">
+          <img src="icons/increase.png" alt="Task priority increase" title="Task priority increase" height="20" width="20">
           <input ref="factor" v-on:keyup="inputAdjust()" :value="priorityFactor" @input="$emit('update:priority-factor', $event.target.value)" aria-label="Task factor" />
         </span>
         <button v-if="expanded" v-on:click="$emit('activity')">
-          <img src="icons/count.png" alt="Number of times task was completed" height="20" width="20">{{ activityCounter }}x
+          <img src="icons/count.png" alt="Number of times task was completed" title="Number of times task was completed" height="20" width="20">{{ activityCounter }}x
         </button>
         <button v-if="expanded" v-on:click="$emit('remove')">
-          <img src="icons/delete.png" alt="Delete task" height="20" width="20">
+          <img src="icons/delete.png" alt="Delete task" title="Delete task" height="20" width="20">
         </button>
       </div>
       <textarea ref="message" v-on:keyup="textAreaAdjust()" :value="text" @input="$emit('update:text', $event.target.value)" aria-label="Task text"></textarea>
