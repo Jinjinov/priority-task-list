@@ -17,6 +17,7 @@ textarea {
 }
 input {
     border: none;
+    vertical-align: top;
 }
 img {
     vertical-align: bottom; /* solution for space under image */
@@ -25,6 +26,7 @@ button {
     padding: 0 5px;
 }
 .task-top-row-box {
+    vertical-align: top;
     display: inline-block;
     padding: 2px 5px;
     background-color: gainsboro;
