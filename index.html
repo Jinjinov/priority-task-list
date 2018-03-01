@@ -72,6 +72,8 @@
             @update:text="val => { task.text = val; }"
             :priority="task.priority"
             :priority-factor="task.priorityFactor"
+            :paused="task.paused"
+            v-on:toggle="task.paused = !task.paused"
             @update:priority-factor="val => { task.priorityFactor = val; }"
             :activity-counter="task.activityCounter"
             :last-update="task.lastUpdate"
@@ -92,6 +94,8 @@
       -->
     </div>
 
+    <noscript>Sorry, your browser does not support JavaScript!</noscript>
+    
     <script>
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', function() {

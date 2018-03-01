@@ -8,9 +8,10 @@ class Task {
     this.text = text;
     this.priority = 0;
     this.priorityFactor = factor;
+    this.paused = false;
     this.activityCounter = 0;
-    this.lastUpdate = new Date();
     this.lastActivity = new Date();
+    this.lastUpdate = new Date();
   }
 }
 
@@ -85,7 +86,9 @@ Vue.component('task-item', {
 
   // TODO:: one database per user - https://gist.github.com/nolanlawson/9676093
 
-  // TODO:: #0.1 task: active / not active
+  // TODO:: week icon
+  // TODO:: day icon
+
   // TODO:: repeat interval: fixed interval
   // TODO:: scheduled time: time in day / day in week / day in month / day in year
   // TODO:: fixed date
@@ -108,7 +111,7 @@ Vue.component('task-item', {
   // TODO:: completed: too soon / on time / too late --> auto priority adjustment
   // TODO:: suggested priority
 
-  // TODO:: #0.3 parse URL
+  // TODO:: #1 parse URL
   // https://github.com/SoapBox/linkifyjs
   // https://github.com/phanan/vue-linkify
   // https://github.com/bryanwoods/autolink-js/blob/master/autolink-min.js
@@ -122,14 +125,7 @@ Vue.component('task-item', {
   // TODO:: update github Insights / Community
   // TODO:: update github Pages -> demo version
 
-  // TODO:: #0.2 compact mode - all in one row, Enter for next task + arrows
-
-  // TODO:: # image for priority
-  // TODO:: # image for age
-  // TODO:: # image for count
-  // TODO:: # image for delete
-  // TODO:: # image for factor
-  // TODO:: # tooltip text for images
+  // TODO:: compact mode - all in one row, Enter for next task + arrows
 
   // https://codingexplained.com/coding/front-end/vue-js/accessing-dom-refs
 
@@ -149,6 +145,10 @@ Vue.component('task-item', {
           <img src="icons/increase.png" alt="Task priority increase" title="Task priority increase" height="20" width="20">
           <input ref="factor" v-on:keyup="inputAdjust()" :value="priorityFactor" @input="$emit('update:priority-factor', $event.target.value)" aria-label="Task factor" />
         </span>
+        <button v-if="expanded" v-on:click="$emit('toggle')">
+          <img v-if="!paused" src="icons/pause.png" alt="Pause task" title="Pause task" height="20" width="20">
+          <img v-if="paused" src="icons/play.png" alt="Resume task" title="Resume task" height="20" width="20">
+        </button>
         <button v-if="expanded" v-on:click="$emit('activity')">
           <img src="icons/count.png" alt="Number of times task was completed" title="Number of times task was completed" height="20" width="20">{{ activityCounter }}x
         </button>
@@ -163,7 +163,7 @@ Vue.component('task-item', {
   // https://vuejs.org/v2/guide/components.html#Form-Input-Components-using-Custom-Events
   // https://vuejs.org/v2/guide/components.html#sync-Modifier
   // https://medium.com/front-end-hacking/vues-v-model-directive-vs-sync-modifier-d1f83957c57c
-  props: ['text', 'priority', 'priorityFactor', 'activityCounter', 'lastUpdate', 'lastActivity'],
+  props: ['text', 'priority', 'priorityFactor', 'paused', 'activityCounter', 'lastUpdate', 'lastActivity'],
   data: function () {
     return {
       expanded: false
@@ -373,7 +373,9 @@ new Vue({
           var task = this.prioritytasklist.task[key];
 
           var sinceLastUpdate = thisUpdate - new Date(task.lastUpdate);
-          task.priority += Number(task.priorityFactor) * Math.round(sinceLastUpdate / 1000);
+          if(!task.paused) {
+            task.priority += Number(task.priorityFactor) * Math.round(sinceLastUpdate / 1000);
+          }
           task.lastUpdate = thisUpdate;
         }
       }, 1000);
