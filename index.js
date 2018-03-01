@@ -74,9 +74,9 @@ Vue.component('task-item', {
   // https://github.com/mage3k/vue-autosize
   // https://github.com/Nerdinacan/vue-autosize-textarea
 
-  // TODO:: # margin, padding, font size
-  // TODO:: # shadow
-  // TODO:: # soft colors
+  // TODO:: pwa - chrome developer tools - audit - lighthouse:
+  // HTTPS
+  // HTTP/2
 
   // TODO:: sign in: using Google, Facebook, Twitter, ...
   // - https://github.com/websanova/vue-auth
@@ -139,11 +139,11 @@ Vue.component('task-item', {
         <span class="task-top-row-box">pri: {{ priority }}</span>
         <span class="task-top-row-box">age: {{ timeSinceLastActivity }}</span>
         <span v-if="!expanded" class="task-top-row-box">{{ activityCounter }}x</span>
-        <span v-if="expanded" class="factor task-top-row-box">fac: <input ref="factor" v-on:keyup="inputAdjust()" :value="priorityFactor" @input="$emit('update:priority-factor', $event.target.value)" /></span>
+        <span v-if="expanded" class="factor task-top-row-box">fac: <input ref="factor" v-on:keyup="inputAdjust()" :value="priorityFactor" @input="$emit('update:priority-factor', $event.target.value)" aria-label="Task factor" /></span>
         <button v-if="expanded" v-on:click="$emit('activity')">{{ activityCounter }}x</button>
         <button v-if="expanded" v-on:click="$emit('remove')">Del</button>
       </div>
-      <textarea ref="message" v-on:keyup="textAreaAdjust()" :value="text" @input="$emit('update:text', $event.target.value)"></textarea>
+      <textarea ref="message" v-on:keyup="textAreaAdjust()" :value="text" @input="$emit('update:text', $event.target.value)" aria-label="Task text"></textarea>
     </div>
   `,
 

@@ -1,13 +1,11 @@
 html {
     height: 100%;
 }
-
 body {
     height: 100%;
     margin: 0;
     font-family:'Roboto', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
 }
-
 textarea {
     resize: none;
     display: block; /* solution for space under textarea */
@@ -17,21 +15,17 @@ textarea {
     background-color: silver;
     box-sizing: border-box;
 }
-
 input {
     border: none;
 }
-
 .task-top-row-box {
     display: inline-block;
     padding: 3px 5px;
     background-color: gainsboro;
 }
-
 .factor.task-top-row-box {
     padding: 2px 5px;
 }
-
 .task-top-row {
     margin-bottom: 5px;
 }
@@ -50,18 +44,3 @@ input {
     background-color: gray;
     box-sizing: border-box;
 }
-
-/*
-ul {
-    padding: 0;
-    list-style-type: none;
-}
-.content2 {
-    min-height: calc(100vh - 94px);
-    padding: 20px 20px 0 20px;
-}
-.footer2 {
-    height: 60px;
-    padding: 0 20px 0 20px;
-}
-*/

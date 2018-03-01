@@ -3,7 +3,7 @@
   <head>
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"/>
 
     <meta name="theme-color" content="#448AFF">
     <meta name="mobile-web-app-capable" content="yes">
@@ -59,9 +59,9 @@
       -->        
         <div v-on:click="onLeftClick()" v-click-outside="addNewTask" class="task">
           <div class="task-top-row">
-            <span v-if="expanded" class="task-top-row-box">fac: <input ref="factor" v-on:keyup="inputAdjust()" v-model="newTaskFactor" /></span>
+            <span v-if="expanded" class="task-top-row-box">fac: <input ref="factor" v-on:keyup="inputAdjust()" v-model="newTaskFactor" aria-label="Task factor" /></span>
           </div>
-          <textarea ref="message" v-on:keyup="textAreaAdjust()" v-model="newTaskText" placeholder="Add a task"></textarea>
+          <textarea ref="message" v-on:keyup="textAreaAdjust()" v-model="newTaskText" placeholder="Add a task" aria-label="Add a task"></textarea>
         </div>
         <div v-for="task in tasksByPriority" :key="task._id">
           <task-item
@@ -88,6 +88,18 @@
       </footer>
       -->
     </div>
+
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('worker.js').then(function(registration) {
+            console.log('ServiceWorker registration successful with scope: ', registration.scope);
+          }, function(err) {
+            console.log('ServiceWorker registration failed: ', err);
+          });
+        });
+      }
+    </script>
 
     <script src="https://cdn.jsdelivr.net/gh/pouchdb/pouchdb@6.3.4/dist/pouchdb.min.js"></script> <!-- 148 kb -->
     <!-- script src="https://cdn.jsdelivr.net/gh/pouchdb/pouchdb@6.3.4/dist/pouchdb.find.min.js"></script --> <!-- 60 kb -->
