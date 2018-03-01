@@ -86,9 +86,6 @@ Vue.component('task-item', {
 
   // TODO:: one database per user - https://gist.github.com/nolanlawson/9676093
 
-  // TODO:: week icon
-  // TODO:: day icon
-
   // TODO:: repeat interval: fixed interval
   // TODO:: scheduled time: time in day / day in week / day in month / day in year
   // TODO:: fixed date
@@ -136,7 +133,9 @@ Vue.component('task-item', {
           <img src="icons/priority.png" alt="Task priority" title="Task priority" height="20" width="20"> {{ priority }}
         </span>
         <span class="task-top-row-box">
-          <img src="icons/age.png" alt="Time since task was last completed" title="Time since task was last completed" height="20" width="20"> {{ timeSinceLastActivity }}
+          <img src="icons/age.png" alt="Time since task was last completed" title="Time since task was last completed" height="20" width="20"> {{ timeSinceLastActivity.weeks }}
+          <img src="icons/week.png" alt="Weeks since task was last completed" title="Weeks since task was last completed" height="20" width="20"> {{ timeSinceLastActivity.days }}
+          <img src="icons/day.png" alt="Days since task was last completed" title="Days since task was last completed" height="20" width="20"> {{ timeSinceLastActivity.time }}
         </span>
         <span v-if="!expanded" class="task-top-row-box">
           <img src="icons/count.png" alt="Number of times task was completed" title="Number of times task was completed" height="20" width="20">{{ activityCounter }}x
@@ -187,23 +186,13 @@ Vue.component('task-item', {
 
       var time = hours+':'+minutes+':'+seconds;
 
-      if(days == 1) {
-        time = days+' day '+time;
-      }
+      var obj = {
+        weeks:  weeks,
+        days: days,
+        time: time
+      };
 
-      if(days > 1) {
-        time = days+' days '+time;
-      }
-
-      if(weeks == 1) {
-        time = weeks+' week '+time;
-      }
-
-      if(weeks > 1) {
-        time = weeks+' weeks '+time;
-      }
-
-      return time;
+      return obj;
     }
   },
   methods: {
