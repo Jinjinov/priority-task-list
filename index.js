@@ -61,6 +61,8 @@ Vue.directive('click-outside', {
   // HTTPS
   // HTTP/2
 
+  // TODO:: PouchDB - sync deletion across devices
+
   // TODO::LATER sign in: using Google, Facebook, Twitter, ...
   // - https://github.com/websanova/vue-auth
   // - https://github.com/dgrubelic/vue-authenticate
