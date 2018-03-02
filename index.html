@@ -1,128 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"/>
-
     <meta name="theme-color" content="#448AFF">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="#448AFF">
     <meta name="apple-mobile-web-app-title" content="Priority Task List">
 
-    <link rel="icon" href="favicon.ico" type="image/x-icon"/> <!-- 30 kb -->
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/> <!-- 30 kb -->
-
-    <link rel="manifest" href="manifest.json"> <!-- 1 kb -->
-
     <title>Priority Task List</title>
     
+    <link rel="icon" href="favicon.ico" type="image/x-icon"/> <!-- 30 kb -->
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/> <!-- 30 kb -->
+    <link rel="manifest" href="manifest.json"> <!-- 1 kb -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css"> <!-- 2 kb -->
-    
-    <!--
-    166 kb - <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.0/css/bulma.min.css"> - 0.6.2
-
-    rounded edges, spacing under input/textarea, enabled and disabled button are the same:
-    6 kb - <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css"> - 2.0.4
-    
-    ul indent with padding 0 is stil there:
-    42 kb - <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/spectre.css/0.4.5/spectre.min.css"> - 0.5.0
-    
-    rounded edges, spacing under input/textarea:
-    9 kb - <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.3.0/milligram.min.css"> - 1.3.0
-    
-    textarea width 100% is too large with all of these:
-
-    17 kb - <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css"> - 1.0.0
-    35 kb - <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gridlex/2.4.1/gridlex.min.css"> - 2.6.1
-    
-    38 kb - <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mini.css/2.3.7/mini-default.min.css"> - 2.3.7
-    38 kb - <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mini.css/2.3.7/mini-dark.min.css">
-    22 kb - <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mini.css/2.3.7/mini-lite.min.css">
-    39 kb - <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mini.css/2.3.7/mini-nord.min.css">
-    23 kb - <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mini.css/2.3.7/mini-pwa.min.css">
-    34 kb - <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mini.css/2.3.7/mini-sucroa.min.css">
-    -->
-  
-    <link href="index.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-
+    <link rel="stylesheet" href="index.css" type="text/css"/>
   </head>
-
   <body>
     <!--
     The JSON standard specifies that all key/value pairs should be in double quotes.
     -->
     <div id="app" class="tasks-vue-app">
-      <!--      
-      <div class="content2">
-      -->        
-        <div v-on:click="onLeftClick()" v-click-outside="addNewTask" class="task">
-          <div class="task-top-row">
-            <span v-if="expanded" class="task-top-row-box">
-              <img src="icons/increase.png" alt="Task priority increase" title="Task priority increase" height="20" width="20">
-              <input ref="factor" v-on:keyup="inputAdjust()" v-model="newTaskFactor" aria-label="Task factor" />
-            </span>
-          </div>
-          <textarea ref="message" v-on:keyup="textAreaAdjust()" v-model="newTaskText" placeholder="Add a task" aria-label="Add a task"></textarea>
+      <div v-on:click="onLeftClick()" v-click-outside="addNewTask" class="task">
+        <div class="task-top-row">
+          <span v-if="expanded" class="task-top-row-box">
+            <img src="icons/increase.png" alt="Task priority increase" title="Task priority increase" height="20" width="20">
+            <input ref="factor" v-on:keyup="inputAdjust()" v-model="newTaskFactor" aria-label="Task factor" />
+          </span>
         </div>
-        <div v-for="task in tasksByPriority" :key="task._id">
-          <task-item
-            :text="task.text"
-            @update:text="val => { task.text = val; }"
-            :priority="task.priority"
-            :priority-factor="task.priorityFactor"
-            :paused="task.paused"
-            v-on:toggle="task.paused = !task.paused"
-            @update:priority-factor="val => { task.priorityFactor = val; }"
-            :activity-counter="task.activityCounter"
-            :last-update="task.lastUpdate"
-            :last-activity="task.lastActivity"
-            v-on:outside="clickOutsideTask(task._id)"
-            v-on:remove="deleteTask(task._id)"
-            v-on:activity="onTaskActivity(task._id)"
-            v-on:click.native="onLeftClickTask(task._id)"
-          ></task-item>
-        </div>
-      <!--
+        <textarea ref="message" v-on:keyup="textAreaAdjust()" v-model="newTaskText" placeholder="Add a task" aria-label="Add a task"></textarea>
       </div>
-      <footer class="footer2">
-          Selected:
-          {{ selectedTaskKey }}
-          <button v-on:click="deleteSelected" :disabled="selectedTaskKey == -1">Delete selected</button>
-      </footer>
-      -->
+      <div v-for="task in tasksByPriority" :key="task._id">
+        <task-item
+          :text="task.text"
+          @update:text="val => { task.text = val; }"
+          :priority="task.priority"
+          :priority-factor="task.priorityFactor"
+          :paused="task.paused"
+          v-on:toggle="task.paused = !task.paused"
+          @update:priority-factor="val => { task.priorityFactor = val; }"
+          :activity-counter="task.activityCounter"
+          :last-update="task.lastUpdate"
+          :last-activity="task.lastActivity"
+          v-on:outside="clickOutsideTask(task._id)"
+          v-on:remove="deleteTask(task._id)"
+          v-on:activity="onTaskActivity(task._id)"
+          v-on:click.native="onLeftClickTask(task._id)"
+        ></task-item>
+      </div>
     </div>
-
     <noscript>Sorry, your browser does not support JavaScript!</noscript>
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pouchdb/6.4.3/pouchdb.min.js"></script> <!-- 148 kb -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.js"></script> <!-- 279 kb -->
+    <script src="vuepouch.js"></script> <!-- 4 kb -->
+    <script src="index.js"></script>
     <script>
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', function() {
-          navigator.serviceWorker.register('worker.js').then(function(registration) {
-            console.log('ServiceWorker registration successful with scope: ', registration.scope);
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", function() {
+          navigator.serviceWorker.register("worker.js").then(function(registration) {
+            console.log("ServiceWorker registration successful with scope: ", registration.scope);
           }, function(err) {
-            console.log('ServiceWorker registration failed: ', err);
+            console.log("ServiceWorker registration failed: ", err);
           });
         });
       }
     </script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pouchdb/6.4.3/pouchdb.min.js"></script> <!-- 148 kb -->
-
     <script>
-      //new PouchDB('prioritytasklist').destroy().then(function () {
+      //new PouchDB("prioritytasklist").destroy().then(function () {
       //    // database destroyed
       //  }).catch(function (err) {
       //    // error occurred
       //  })
     </script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.js"></script> <!-- 279 kb -->
-    <!-- script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue-router.js"></script --> <!-- 64 kb -->
-
-    <script src="vuepouch.js"></script> <!-- 4 kb -->
-
-    <script src="index.js"></script>
   </body>
 </html>
