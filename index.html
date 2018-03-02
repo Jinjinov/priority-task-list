@@ -29,7 +29,7 @@
         </div>
         <textarea ref="message" v-on:keyup="textAreaAdjust()" v-model="newTaskText" placeholder="Add a task" aria-label="Add a task"></textarea>
       </div>
-      <button v-on:click="addAllTasks()">Add all tasks</button>
+      <!-- button v-on:click="addAllTasks()">Add all tasks</button -->
       <div v-for="task in tasksByPriority" :key="task._id">
         <task-item
           :text="task.text"

@@ -79,8 +79,6 @@ Vue.component('task-item', {
   // HTTPS
   // HTTP/2
 
-  // TODO:: hardcode "template" tasks
-
   // TODO::LATER sign in: using Google, Facebook, Twitter, ...
   // - https://github.com/websanova/vue-auth
   // - https://github.com/dgrubelic/vue-authenticate
