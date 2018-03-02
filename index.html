@@ -15,12 +15,10 @@
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/> <!-- 30 kb -->
     <link rel="manifest" href="manifest.json"> <!-- 1 kb -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css"> <!-- 2 kb -->
-    <link rel="stylesheet" href="index.css" type="text/css"/>
+    <link rel="stylesheet" href="index.css" type="text/css"/> <!-- 2 kb -->
   </head>
   <body>
-    <!--
-    The JSON standard specifies that all key/value pairs should be in double quotes.
-    -->
+    <!-- The JSON standard specifies that all key/value pairs should be in double quotes. -->
     <div id="app" class="tasks-vue-app">
       <div v-on:click="onLeftClick()" v-click-outside="addNewTask" class="task">
         <div class="task-top-row">
@@ -50,11 +48,13 @@
         ></task-item>
       </div>
     </div>
+
     <noscript>Sorry, your browser does not support JavaScript!</noscript>
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pouchdb/6.4.3/pouchdb.min.js"></script> <!-- 148 kb -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.js"></script> <!-- 279 kb -->
     <script src="vuepouch.js"></script> <!-- 4 kb -->
-    <script src="index.js"></script>
+    <script src="index.js"></script> <!-- 14 kb -->
     <script>
       if ("serviceWorker" in navigator) {
         window.addEventListener("load", function() {
