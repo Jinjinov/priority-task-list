@@ -14,6 +14,7 @@ textarea {
     border: none;
     background-color: silver;
     box-sizing: border-box;
+    overflow-y: hidden; /* hide scrollbar */
 }
 input {
     border: none;

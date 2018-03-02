@@ -92,7 +92,8 @@ Vue.component('task-item', {
   // - duration is more important: sleep, work - scheduled time
   // - ‎number of repetitions is more important: brush teeth, shower, shave - time elapsed since last repetition
 
-  // TODO::SOON labels / groups with base priority offset: y = k * x + n
+  // TODO:: color labels
+  // TODO::SOON groups with base priority offset: y = k * x + n
   // - sleep / rest
   // - work
   // - groom
@@ -122,7 +123,8 @@ Vue.component('task-item', {
   // TODO::LATER update github Insights / Community
   // TODO::LATER update github Pages -> demo version
 
-  // TODO::SOON compact mode - all in one row - only "Done" button at the end of the row
+  // TODO:: menu on top
+  // TODO:: compact mode - all in one row - only "Done" button at the end of the row
 
   // https://codingexplained.com/coding/front-end/vue-js/accessing-dom-refs
 
@@ -142,7 +144,7 @@ Vue.component('task-item', {
         </span>
         <span v-if="expanded" class="task-top-row-box">
           <img src="icons/increase.png" alt="Task priority increase" title="Task priority increase" height="20" width="20">
-          <input ref="factor" v-on:keyup="inputAdjust()" :value="priorityFactor" @input="$emit('update:priority-factor', $event.target.value)" aria-label="Task factor" />
+          <input ref="factor" v-on:input="inputAdjust()" :value="priorityFactor" @input="$emit('update:priority-factor', $event.target.value)" aria-label="Task factor" />
         </span>
         <button v-if="expanded" v-on:click="$emit('toggle')">
           <img v-if="!paused" src="icons/pause.png" alt="Pause task" title="Pause task" height="20" width="20">
@@ -155,7 +157,7 @@ Vue.component('task-item', {
           <img src="icons/delete.png" alt="Delete task" title="Delete task" height="20" width="20">
         </button>
       </div>
-      <textarea ref="message" v-on:keyup="textAreaAdjust()" :value="text" @input="$emit('update:text', $event.target.value)" aria-label="Task text"></textarea>
+      <textarea ref="message" v-on:input="textAreaAdjust()" :value="text" @input="$emit('update:text', $event.target.value)" aria-label="Task text"></textarea>
     </div>
   `,
 
@@ -201,7 +203,7 @@ Vue.component('task-item', {
 
       this.$nextTick(() => {
         this.inputAdjust();
-     })
+      })
     },
     onClickOutside() {
       if(this.expanded) {
@@ -212,7 +214,7 @@ Vue.component('task-item', {
     textAreaAdjust() {
       var o = this.$refs.message;
       o.style.height = "1px";
-      o.style.height = (20+o.scrollHeight)+"px";
+      o.style.height = (o.scrollHeight)+"px";
     },
     inputAdjust() {
       var o = this.$refs.factor;
@@ -274,7 +276,7 @@ new Vue({
       textAreaAdjust() {
         var o = this.$refs.message;
         o.style.height = "1px";
-        o.style.height = (20+o.scrollHeight)+"px";
+        o.style.height = (o.scrollHeight)+"px";
       },
       inputAdjust() {
         var o = this.$refs.factor;
@@ -310,7 +312,7 @@ new Vue({
   
         this.$nextTick(() => {
           this.inputAdjust();
-       })
+        })
       },
       onLeftClickTask(key) {
         if(key in this.prioritytasklist.task) {
