@@ -79,20 +79,22 @@ Vue.component('task-item', {
   // HTTPS
   // HTTP/2
 
-  // TODO:: sign in: using Google, Facebook, Twitter, ...
+  // TODO:: hardcode "template" tasks
+
+  // TODO::LATER sign in: using Google, Facebook, Twitter, ...
   // - https://github.com/websanova/vue-auth
   // - https://github.com/dgrubelic/vue-authenticate
   // X - https://github.com/auth0-blog/vue-jwt-authentication - NodeJS, JSON Web Token
 
-  // TODO:: one database per user - https://gist.github.com/nolanlawson/9676093
+  // TODO::LATER one database per user - https://gist.github.com/nolanlawson/9676093
 
-  // TODO:: repeat interval: fixed interval
-  // TODO:: scheduled time: time in day / day in week / day in month / day in year
-  // TODO:: fixed date
+  // TODO::SOON repeat interval: fixed interval
+  // TODO::SOON scheduled time: time in day / day in week / day in month / day in year
+  // TODO::SOON fixed date
   // - duration is more important: sleep, work - scheduled time
   // - ‎number of repetitions is more important: brush teeth, shower, shave - time elapsed since last repetition
 
-  // TODO:: groups with base priority offset: y = k * x + n
+  // TODO::SOON labels / groups with base priority offset: y = k * x + n
   // - sleep / rest
   // - work
   // - groom
@@ -102,11 +104,11 @@ Vue.component('task-item', {
   // - mind
   // - relax / enjoy
 
-  // TODO:: detailed first step plan: what, when, where, who, why, how, ...
+  // TODO::LATER detailed first step plan: what, when, where, who, why, how, ...
   
-  // TODO:: counter of minutes spent on task
-  // TODO:: completed: too soon / on time / too late --> auto priority adjustment
-  // TODO:: suggested priority
+  // TODO::LATER counter of minutes spent on task
+  // TODO::LATER completed: too soon / on time / too late --> auto priority adjustment
+  // TODO::LATER suggested priority
 
   // TODO:: #1 parse URL
   // https://github.com/SoapBox/linkifyjs
@@ -117,12 +119,12 @@ Vue.component('task-item', {
   // https://github.com/gregjacobs/Autolinker.js/blob/master/dist/Autolinker.min.js
   // https://github.com/ljosa/urlize.js/blob/master/urlize.js
   
-  // TODO:: update github Projects
-  // TODO:: update github Wiki
-  // TODO:: update github Insights / Community
-  // TODO:: update github Pages -> demo version
+  // TODO::LATER update github Projects
+  // TODO::LATER update github Wiki
+  // TODO::LATER update github Insights / Community
+  // TODO::LATER update github Pages -> demo version
 
-  // TODO:: compact mode - all in one row, Enter for next task + arrows
+  // TODO::SOON compact mode - all in one row - only "Done" button at the end of the row
 
   // https://codingexplained.com/coding/front-end/vue-js/accessing-dom-refs
 
