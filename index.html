@@ -31,26 +31,38 @@
             <input ref="factor" v-on:input="inputAdjust()" v-model="newTaskFactor" aria-label="Task factor" />
           </span>
         </div>
-        <textarea ref="message" v-on:input="textAreaAdjust()" v-model="newTaskText" placeholder="Add a task" aria-label="Add a task"></textarea>
+        <textarea ref="message" v-on:input="textAreaAdjust()" v-model="newTaskText" placeholder="Add a task" aria-label="Add a task" class="task-text"></textarea>
       </div>
       <!-- button v-on:click="addAllTasks()">Add all tasks</button -->
-      <div v-for="task in tasksByPriority" :key="task._id">
-        <task-item
-          :text="task.text"
-          @update:text="val => { task.text = val; }"
-          :priority="task.priority"
-          :priority-factor="task.priorityFactor"
-          :paused="task.paused"
-          v-on:toggle="task.paused = !task.paused"
-          @update:priority-factor="val => { task.priorityFactor = val; }"
-          :activity-counter="task.activityCounter"
-          :last-update="task.lastUpdate"
-          :last-activity="task.lastActivity"
-          v-on:outside="clickOutsideTask(task._id)"
-          v-on:remove="deleteTask(task._id)"
-          v-on:activity="onTaskActivity(task._id)"
-          v-on:click.native="onLeftClickTask(task._id)"
-        ></task-item>
+      <div v-if="compactMode">
+        <div v-for="task in tasksByPriority" :key="task._id">
+          <compact-task-item
+            :text="task.text"
+            @update:text="val => { task.text = val; }"
+            :activity-counter="task.activityCounter"
+            v-on:activity="onTaskActivity(task._id)"
+          ></compact-task-item>
+        </div>
+      </div>
+      <div v-else>
+        <div v-for="task in tasksByPriority" :key="task._id">
+          <task-item
+            :text="task.text"
+            @update:text="val => { task.text = val; }"
+            :priority="task.priority"
+            :priority-factor="task.priorityFactor"
+            @update:priority-factor="val => { task.priorityFactor = val; }"
+            :paused="task.paused"
+            v-on:toggle="task.paused = !task.paused"
+            :activity-counter="task.activityCounter"
+            :last-update="task.lastUpdate"
+            :last-activity="task.lastActivity"
+            v-on:outside="clickOutsideTask(task._id)"
+            v-on:remove="deleteTask(task._id)"
+            v-on:activity="onTaskActivity(task._id)"
+            v-on:click.native="onLeftClickTask(task._id)"
+          ></task-item>
+        </div>
       </div>
     </div>
 

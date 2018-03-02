@@ -105,8 +105,32 @@ Vue.directive('click-outside', {
   // TODO::LATER update github Insights / Community
   // TODO::LATER update github Pages -> demo version
 
-  // TODO:: menu on top
-  // TODO:: compact mode - all in one row - only "Done" button at the end of the row
+//-------------------------------------------------------------------------
+// compact-task-item
+//-------------------------------------------------------------------------
+Vue.component('compact-task-item', {
+
+  template: `
+    <div class="task-compact">
+      <textarea ref="message" v-on:input="textAreaAdjust()" :value="text" @input="$emit('update:text', $event.target.value)" aria-label="Task text" class="task-text-compact"></textarea>
+      <button v-on:click="$emit('activity')">
+        <img src="icons/count.png" alt="Number of times task was completed" title="Number of times task was completed" height="20" width="20">{{ activityCounter }}x
+      </button>
+    </div>
+  `,
+
+  props: ['text', 'activityCounter'],
+  methods: {
+    textAreaAdjust() {
+      var o = this.$refs.message;
+      o.style.height = "1px";
+      o.style.height = (o.scrollHeight)+"px";
+    }
+  },
+  mounted(){
+    this.textAreaAdjust();
+  }
+})
 
 //-------------------------------------------------------------------------
 // task-item
@@ -157,7 +181,7 @@ Vue.component('task-item', {
           <img src="icons/delete.png" alt="Delete task" title="Delete task" height="20" width="20">
         </button>
       </div>
-      <textarea ref="message" v-on:input="textAreaAdjust()" :value="text" @input="$emit('update:text', $event.target.value)" aria-label="Task text"></textarea>
+      <textarea ref="message" v-on:input="textAreaAdjust()" :value="text" @input="$emit('update:text', $event.target.value)" aria-label="Task text" class="task-text"></textarea>
     </div>
   `,
 

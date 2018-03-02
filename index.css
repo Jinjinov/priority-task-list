@@ -6,11 +6,23 @@ body {
     margin: 0;
     font-family:'Roboto', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
 }
-textarea {
+.task-text {
     resize: none;
     display: block; /* solution for space under textarea */
     /* vertical-align: top; /* solution for space under textarea */
     width: 100%;
+    border: none;
+    background-color: silver;
+    box-sizing: border-box;
+    overflow-y: hidden; /* hide scrollbar */
+}
+.task-text-compact {
+    resize: none;
+    flex: 1; /*take all the available space*/
+    margin-right: 5px;
+    /* display: block; /* solution for space under textarea */
+    /* vertical-align: top; /* solution for space under textarea */
+    /* width: 100%; */
     border: none;
     background-color: silver;
     box-sizing: border-box;
@@ -43,6 +55,12 @@ button {
     padding: 5px;
     background-color: silver;
     box-sizing: border-box;
+}
+.task-compact {
+    display: flex;
+    margin-top: 10px;
+    padding: 5px;
+    background-color: silver;
 }
 .top-menu {
     display: inline-block;
