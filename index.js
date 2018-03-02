@@ -286,7 +286,13 @@ new Vue({
         var font = style.getPropertyValue('font-family');
         o.style.width = getWidthOfText(o.value, size, font)+5+"px";
       },
-      addNewTask: function () {
+      addAllTasks() {
+        for(var key in tasks) {
+          var task = new Task(tasks[key].text, tasks[key].priorityFactor);
+          this.$pouchdbRefs.prioritytasklist.put('task', task);
+        }
+      },
+      addNewTask() {
         if(this.expanded) {
           this.expanded = false;
         }
@@ -296,7 +302,6 @@ new Vue({
         }
 
         var task = new Task(this.newTaskText, this.newTaskFactor);
-
         this.$pouchdbRefs.prioritytasklist.put('task', task);
 
         this.newTaskText = "";

@@ -22,176 +22,176 @@ var tasks = [
     },
     {
         "label": "grooming",
-        "text": "floss",
+        "text": "floss teeth",
         "priorityFactor": 1
     },
     //CHORES - clean:
     {
         "label": "chores",
-        "text": "clothes, laundry",
+        "text": "wash clothes, do laundry",
         "priorityFactor": 1
     },
     {
         "label": "chores",
-        "text": "dishes",
+        "text": "wash dishes",
         "priorityFactor": 1
     },
     {
         "label": "chores",
-        "text": "trash can",
+        "text": "empty trash can",
         "priorityFactor": 1
     },
     {
         "label": "chores",
-        "text": "table",
+        "text": "clean table",
         "priorityFactor": 1
     },
     {
         "label": "chores",
-        "text": "counter",
+        "text": "clean counter",
         "priorityFactor": 1
     },
     {
         "label": "chores",
-        "text": "floor",
+        "text": "clean floor",
         "priorityFactor": 1
     },
     {
         "label": "chores",
-        "text": "sink",
+        "text": "clean sink",
         "priorityFactor": 1
     },
     {
         "label": "chores",
-        "text": "bathtub",
+        "text": "clean bathtub",
         "priorityFactor": 1
     },
     {
         "label": "chores",
-        "text": "tiles on walls",
+        "text": "clean tiles on walls",
         "priorityFactor": 1
     },
     {
         "label": "chores",
-        "text": "light switches",
+        "text": "clean light switches",
         "priorityFactor": 1
     },
     {
         "label": "chores",
-        "text": "windows",
+        "text": "clean windows",
         "priorityFactor": 1
     },
     //BODY - exercise:
     {
         "label": "body",
-        "text": "rehabilitation",
+        "text": "do rehabilitation exercises",
         "priorityFactor": 1
     },
     {
         "label": "body",
-        "text": "climbing",
+        "text": "go climbing",
         "priorityFactor": 1
     },
     {
         "label": "body",
-        "text": "walks",
+        "text": "go on walks",
         "priorityFactor": 1
     },
     {
         "label": "body",
-        "text": "hiking",
+        "text": "go hiking",
         "priorityFactor": 1
     },
     {
         "label": "body",
-        "text": "handstand",
+        "text": "practice handstand",
         "priorityFactor": 1
     },
     {
         "label": "body",
-        "text": "planche",
+        "text": "practice planche",
         "priorityFactor": 1
     },
     {
         "label": "body",
-        "text": "meditation",
+        "text": "meditate",
         "priorityFactor": 1
     },
     {
         "label": "body",
-        "text": "martial arts",
+        "text": "do martial arts",
         "priorityFactor": 1
     },
     //MIND - progress, be productive, learn, build:
     {
         "label": "mind",
-        "text": "read",
+        "text": "read programming boks",
         "priorityFactor": 1
     },
     {
         "label": "mind",
-        "text": "tutorials",
+        "text": "read programming tutorials",
         "priorityFactor": 1
     },
     {
         "label": "mind",
-        "text": "programming",
+        "text": "program on a project",
         "priorityFactor": 1
     },
     {
         "label": "mind",
-        "text": "web site - personal growth",
+        "text": "build a web site",
         "priorityFactor": 1
     },
     {
         "label": "mind",
-        "text": "calisthenics park",
+        "text": "build a calisthenics park",
         "priorityFactor": 1
     },
     {
         "label": "mind",
-        "text": "mahjong",
+        "text": "play mahjong",
         "priorityFactor": 1
     },
     {
         "label": "mind",
-        "text": "go",
+        "text": "play go",
         "priorityFactor": 1
     },
     {
         "label": "mind",
-        "text": "shogi",
+        "text": "play shogi",
         "priorityFactor": 1
     },
     {
         "label": "mind",
-        "text": "pencil drawing",
+        "text": "draw pencil drawings",
         "priorityFactor": 1
     },
     {
         "label": "mind",
-        "text": "story writing",
+        "text": "write fantasy stories",
         "priorityFactor": 1
     },
     //RELAX / ENJOY - relax, enjoy:
     {
         "label": "relax / enjoy",
-        "text": "salsa",
+        "text": "dance salsa",
         "priorityFactor": 1
     },
     {
         "label": "relax / enjoy",
-        "text": "movies",
+        "text": "watch movies",
         "priorityFactor": 1
     },
     {
         "label": "relax / enjoy",
-        "text": "tv series",
+        "text": "watch tv series",
         "priorityFactor": 1
     },
     {
         "label": "relax / enjoy",
-        "text": "games",
+        "text": "play video games",
         "priorityFactor": 1
     },
     {
@@ -201,49 +201,49 @@ var tasks = [
     },
     {
         "label": "relax / enjoy",
-        "text": "anime",
+        "text": "watch anime",
         "priorityFactor": 1
     },
     {
         "label": "relax / enjoy",
-        "text": "manga",
+        "text": "read manga",
         "priorityFactor": 1
     },
     //vacation:
     {
         "label": "relax / enjoy",
-        "text": "mountain biking",
+        "text": "go mountain biking",
         "priorityFactor": 1
     },
     {
         "label": "relax / enjoy",
-        "text": "windsurfing",
+        "text": "go windsurfing",
         "priorityFactor": 1
     },
     {
         "label": "relax / enjoy",
-        "text": "snowboarding",
+        "text": "go snowboarding",
         "priorityFactor": 1
     },
     //COOK / EAT - food:
     {
         "label": "cook / eat",
-        "text": "many meals",
+        "text": "eat many meals",
         "priorityFactor": 1
     },
     {
         "label": "cook / eat",
-        "text": "lots of water",
+        "text": "drink lots of water",
         "priorityFactor": 1
     },
     {
         "label": "cook / eat",
-        "text": "fruits",
+        "text": "eat many fruits",
         "priorityFactor": 1
     },
     {
         "label": "cook / eat",
-        "text": "vegetables",
+        "text": "eat many vegetables",
         "priorityFactor": 1
     }
 ];
