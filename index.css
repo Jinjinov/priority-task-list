@@ -44,6 +44,14 @@ button {
     background-color: silver;
     box-sizing: border-box;
 }
+.top-menu {
+    display: inline-block;
+    vertical-align: top; /* solution for space under inline-block */
+    width: 100%;
+    padding: 5px;
+    background-color: silver;
+    box-sizing: border-box;
+}
 .tasks-vue-app {
     min-height: 100%;
     padding: 0 10px;

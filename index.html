@@ -20,6 +20,10 @@
   <body>
     <!-- The JSON standard specifies that all key/value pairs should be in double quotes. -->
     <div id="app" class="tasks-vue-app">
+      <div class="top-menu">
+        <input type="checkbox" id="compact" v-model="compactMode">
+        <label for="compact">Compact mode</label>
+      </div>
       <div v-on:click="onLeftClick()" v-click-outside="addNewTask" class="task">
         <div class="task-top-row">
           <span v-if="expanded" class="task-top-row-box">

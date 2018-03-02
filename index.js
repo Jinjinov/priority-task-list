@@ -57,24 +57,6 @@ Vue.directive('click-outside', {
   },
 });
 
-//-------------------------------------------------------------------------
-// task-item
-//-------------------------------------------------------------------------
-Vue.component('task-item', {
-  // https://medium.com/js-dojo/7-ways-to-define-a-component-template-in-vuejs-c04e0c72900d
-  // https://sebastiandedeyne.com/posts/2016/dealing-with-templates-in-vue-20
-
-  // https://stackoverflow.com/questions/36170425/detect-click-outside-element/36180348
-  // https://jsfiddle.net/70vm3jrd/1/
-
-  // https://stackoverflow.com/questions/11805352/floatleft-vs-displayinline-vs-displayinline-block-vs-displaytable-cell
-  // https://stackoverflow.com/questions/15172520/advantages-of-using-displayinline-block-vs-floatleft-in-css
-
-  // https://github.com/egoist/vue-autosize-textarea
-  // https://github.com/egoist/vue-autosize-textarea/issues/1
-  // https://github.com/mage3k/vue-autosize
-  // https://github.com/Nerdinacan/vue-autosize-textarea
-
   // TODO:: pwa - chrome developer tools - audit - lighthouse:
   // HTTPS
   // HTTP/2
@@ -125,6 +107,24 @@ Vue.component('task-item', {
 
   // TODO:: menu on top
   // TODO:: compact mode - all in one row - only "Done" button at the end of the row
+
+//-------------------------------------------------------------------------
+// task-item
+//-------------------------------------------------------------------------
+Vue.component('task-item', {
+  // https://medium.com/js-dojo/7-ways-to-define-a-component-template-in-vuejs-c04e0c72900d
+  // https://sebastiandedeyne.com/posts/2016/dealing-with-templates-in-vue-20
+
+  // https://stackoverflow.com/questions/36170425/detect-click-outside-element/36180348
+  // https://jsfiddle.net/70vm3jrd/1/
+
+  // https://stackoverflow.com/questions/11805352/floatleft-vs-displayinline-vs-displayinline-block-vs-displaytable-cell
+  // https://stackoverflow.com/questions/15172520/advantages-of-using-displayinline-block-vs-floatleft-in-css
+
+  // https://github.com/egoist/vue-autosize-textarea
+  // https://github.com/egoist/vue-autosize-textarea/issues/1
+  // https://github.com/mage3k/vue-autosize
+  // https://github.com/Nerdinacan/vue-autosize-textarea
 
   // https://codingexplained.com/coding/front-end/vue-js/accessing-dom-refs
 
@@ -242,7 +242,8 @@ new Vue({
       selectedTaskKey: -1,
       newTaskText: '',
       newTaskFactor: 1,
-      expanded: false
+      expanded: false,
+      compactMode: false
     },
     //-------------------------------------------------------------------------
     // pouchdb
