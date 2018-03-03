@@ -61,8 +61,6 @@ Vue.directive('click-outside', {
   // HTTPS
   // HTTP/2
 
-  // TODO:: PouchDB - sync deletion across devices
-
   // TODO::LATER sign in: using Google, Facebook, Twitter, ...
   // - https://github.com/websanova/vue-auth
   // - https://github.com/dgrubelic/vue-authenticate
@@ -76,7 +74,7 @@ Vue.directive('click-outside', {
   // - duration is more important: sleep, work - scheduled time
   // - ‎number of repetitions is more important: brush teeth, shower, shave - time elapsed since last repetition
 
-  // TODO:: color labels
+  // TODO:: color labels - select option - in menu as filter
   // TODO::SOON groups with base priority offset: y = k * x + n
   // - sleep / rest
   // - work
