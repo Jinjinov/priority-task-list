@@ -74,6 +74,7 @@ Vue.directive('click-outside', {
   // - duration is more important: sleep, work - scheduled time
   // - ‎number of repetitions is more important: brush teeth, shower, shave - time elapsed since last repetition
 
+  // TODO:: expanded menu
   // TODO:: color labels - select option - in menu as filter
   // TODO::SOON groups with base priority offset: y = k * x + n
   // - sleep / rest
@@ -112,7 +113,7 @@ Vue.component('compact-task-item', {
 
   template: `
     <div class="task-compact">
-      <textarea ref="message" v-on:input="textAreaAdjust()" :value="text" @input="$emit('update:text', $event.target.value)" aria-label="Task text" class="task-text-compact"></textarea>
+      <textarea ref="message" v-on:input="textAreaAdjust()" :value="text" @input="$emit('update:text', $event.target.value)" aria-label="Task text" class="task-compact-textarea"></textarea>
       <button v-on:click="$emit('activity')">
         <img src="icons/count.png" alt="Number of times task was completed" title="Number of times task was completed" height="20" width="20">{{ activityCounter }}x
       </button>
@@ -155,33 +156,33 @@ Vue.component('task-item', {
   template: `
     <div v-on:click="onLeftClick()" v-click-outside="onClickOutside" class="task">
       <div class="task-top-row">
-        <span class="task-top-row-box">
+        <span class="task-top-row-span">
           <img src="icons/priority.png" alt="Task priority" title="Task priority" height="20" width="20"> {{ priority }}
         </span>
-        <span class="task-top-row-box">
+        <span class="task-top-row-span">
           <img src="icons/age.png" alt="Time since task was last completed" title="Time since task was last completed" height="20" width="20"> {{ timeSinceLastActivity.weeks }}
           <img src="icons/week.png" alt="Weeks since task was last completed" title="Weeks since task was last completed" height="20" width="20"> {{ timeSinceLastActivity.days }}
           <img src="icons/day.png" alt="Days since task was last completed" title="Days since task was last completed" height="20" width="20"> {{ timeSinceLastActivity.time }}
         </span>
-        <span v-if="!expanded" class="task-top-row-box">
+        <span v-if="!expanded" class="task-top-row-span">
           <img src="icons/count.png" alt="Number of times task was completed" title="Number of times task was completed" height="20" width="20">{{ activityCounter }}x
         </span>
-        <span v-if="expanded" class="task-top-row-box">
+        <span v-if="expanded" class="task-top-row-span">
           <img src="icons/increase.png" alt="Task priority increase" title="Task priority increase" height="20" width="20">
-          <input ref="factor" v-on:input="inputAdjust()" :value="priorityFactor" @input="$emit('update:priority-factor', $event.target.value)" aria-label="Task factor" />
+          <input ref="factor" v-on:input="inputAdjust()" :value="priorityFactor" @input="$emit('update:priority-factor', $event.target.value)" aria-label="Task factor" class="task-top-row-input" />
         </span>
-        <button v-if="expanded" v-on:click="$emit('toggle')">
+        <button v-if="expanded" v-on:click="$emit('toggle')" class="task-top-row-button">
           <img v-if="!paused" src="icons/pause.png" alt="Pause task" title="Pause task" height="20" width="20">
           <img v-if="paused" src="icons/play.png" alt="Resume task" title="Resume task" height="20" width="20">
         </button>
-        <button v-if="expanded" v-on:click="$emit('activity')">
+        <button v-if="expanded" v-on:click="$emit('activity')" class="task-top-row-button">
           <img src="icons/count.png" alt="Number of times task was completed" title="Number of times task was completed" height="20" width="20">{{ activityCounter }}x
         </button>
-        <button v-if="expanded" v-on:click="$emit('remove')">
+        <button v-if="expanded" v-on:click="$emit('remove')" class="task-top-row-button">
           <img src="icons/delete.png" alt="Delete task" title="Delete task" height="20" width="20">
         </button>
       </div>
-      <textarea ref="message" v-on:input="textAreaAdjust()" :value="text" @input="$emit('update:text', $event.target.value)" aria-label="Task text" class="task-text"></textarea>
+      <textarea ref="message" v-on:input="textAreaAdjust()" :value="text" @input="$emit('update:text', $event.target.value)" aria-label="Task text" class="task-textarea"></textarea>
     </div>
   `,
 

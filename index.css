@@ -6,7 +6,13 @@ body {
     margin: 0;
     font-family:'Roboto', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
 }
-.task-text {
+img {
+    vertical-align: bottom; /* solution for space under image */
+}
+button {
+    padding: 0 5px;
+}
+.task-textarea {
     resize: none;
     display: block; /* solution for space under textarea */
     /* vertical-align: top; /* solution for space under textarea */
@@ -16,7 +22,7 @@ body {
     box-sizing: border-box;
     overflow-y: hidden; /* hide scrollbar */
 }
-.task-text-compact {
+.task-compact-textarea {
     resize: none;
     flex: 1; /*take all the available space*/
     margin-right: 5px;
@@ -28,23 +34,18 @@ body {
     box-sizing: border-box;
     overflow-y: hidden; /* hide scrollbar */
 }
-input {
+.task-top-row-input {
     border: none;
     vertical-align: top;
 }
-img {
-    vertical-align: bottom; /* solution for space under image */
-}
-button {
-    padding: 0 5px;
-}
-.task-top-row-box {
+.task-top-row-span {
     vertical-align: top;
     display: inline-block;
     padding: 2px 5px;
     background-color: gainsboro;
+    margin-bottom: 5px;
 }
-.task-top-row {
+.task-top-row-button {
     margin-bottom: 5px;
 }
 .task {
