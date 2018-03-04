@@ -4,8 +4,9 @@
 // class Task
 //-------------------------------------------------------------------------
 class Task {
-  constructor(text, factor) {
+  constructor(text, factor, group) {
     this.text = text;
+    this.group = group;
     this.priority = 0;
     this.priorityFactor = factor;
     this.paused = false;
@@ -74,7 +75,6 @@ Vue.directive('click-outside', {
   // - duration is more important: sleep, work - scheduled time
   // - ‎number of repetitions is more important: brush teeth, shower, shave - time elapsed since last repetition
 
-  // TODO:: icons 128 x 128
   // TODO:: color labels - select option - in menu as filter
   // TODO::SOON groups with base priority offset: y = k * x + n
   // - sleep / rest
@@ -112,7 +112,7 @@ Vue.directive('click-outside', {
 Vue.component('compact-task-item', {
 
   template: `
-    <div class="task-compact">
+    <div class="task-compact" v-bind:style="{ 'background-color': color }">
       <textarea ref="message" v-on:input="textAreaAdjust()" :value="text" @input="$emit('update:text', $event.target.value)" aria-label="Task text" class="task-compact-textarea"></textarea>
       <button v-on:click="$emit('activity')">
         <img src="icons/count.png" alt="Number of times task was completed" title="Number of times task was completed" height="20" width="20">{{ activityCounter }}x
@@ -120,7 +120,7 @@ Vue.component('compact-task-item', {
     </div>
   `,
 
-  props: ['text', 'activityCounter'],
+  props: ['text', 'activityCounter', 'color'],
   methods: {
     textAreaAdjust() {
       var o = this.$refs.message;
@@ -154,7 +154,7 @@ Vue.component('task-item', {
   // https://codingexplained.com/coding/front-end/vue-js/accessing-dom-refs
 
   template: `
-    <div v-on:click="onLeftClick()" v-click-outside="onClickOutside" class="task">
+    <div v-on:click="onLeftClick()" v-click-outside="onClickOutside" class="task" v-bind:style="{ 'background-color': color }">
       <div class="task-top-row">
         <span class="task-top-row-span">
           <img src="icons/priority.png" alt="Task priority" title="Task priority" height="20" width="20"> {{ priority }}
@@ -189,7 +189,7 @@ Vue.component('task-item', {
   // https://vuejs.org/v2/guide/components.html#Form-Input-Components-using-Custom-Events
   // https://vuejs.org/v2/guide/components.html#sync-Modifier
   // https://medium.com/front-end-hacking/vues-v-model-directive-vs-sync-modifier-d1f83957c57c
-  props: ['text', 'priority', 'priorityFactor', 'paused', 'activityCounter', 'lastUpdate', 'lastActivity'],
+  props: ['text', 'priority', 'priorityFactor', 'paused', 'activityCounter', 'lastUpdate', 'lastActivity', 'color'],
   data: function () {
     return {
       expanded: false
@@ -267,9 +267,34 @@ new Vue({
       selectedTaskKey: -1,
       newTaskText: '',
       newTaskFactor: 1,
+      newTaskGroup: 'all',
       expanded: false,
       expandedMenu: false,
-      compactMode: false
+      compactMode: false,
+
+      // sleep - light blue
+      // work - dark blue
+      // family / friends - brown
+      // shopping - pink
+      // exercises - white
+
+      // GROOM - clean: - green
+      // CHORES - clean: - yellow
+      // BODY - exercise: - blue
+      // MIND - progress, be productive, learn, build: - purple
+      // RELAX / ENJOY - relax, enjoy: - red
+      // COOK / EAT - food: - orange
+
+      selectedGroup: 'all',
+      taskGroups: {
+        'all': "gray",
+        'relax / enjoy': "red",
+        'cook / eat': "orange",
+        'chores': "yellow",
+        'mind': "purple",
+        'grooming': "green",
+        'body': "blue"
+      }
     },
     //-------------------------------------------------------------------------
     // pouchdb
@@ -291,7 +316,10 @@ new Vue({
       tasksByPriority() {
         var sortable = [];
         for (var key in this.prioritytasklist.task) {
-            sortable.push(this.prioritytasklist.task[key]);
+          var task = this.prioritytasklist.task[key];
+          if(this.selectedGroup == 'all' || task.group == this.selectedGroup) {
+            sortable.push(task);
+          }
         }
         return sortable.sort((a,b) => b.priority - a.priority);
       }
@@ -315,7 +343,7 @@ new Vue({
       },
       addAllTasks() {
         for(var key in tasks) {
-          var task = new Task(tasks[key].text, tasks[key].priorityFactor);
+          var task = new Task(tasks[key].text, tasks[key].priorityFactor, tasks[key].group);
           this.$pouchdbRefs.prioritytasklist.put('task', task);
         }
       },

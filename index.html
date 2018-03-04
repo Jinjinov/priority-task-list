@@ -21,14 +21,21 @@
     <!-- The JSON standard specifies that all key/value pairs should be in double quotes. -->
     <div id="app" class="tasks-vue-app">
       <div class="top-menu">
-        <button v-on:click="expandedMenu = !expandedMenu" class="top-menu-button">
+        <button v-on:click="expandedMenu = !expandedMenu" class="top-menu-button" id="menu">
           <img src="icons/menu.png" alt="Menu" title="Menu" height="20" width="20">
         </button>
-        <span>Priority Task List</span>
+        <label for="menu">Priority Task List</label>
         <div v-if="expandedMenu">
           <hr>
           <input type="checkbox" id="compact" v-model="compactMode">
           <label for="compact">Compact mode</label>
+          <br>
+          <label for="group">Group:</label>
+          <select v-model="selectedGroup" id="group">
+            <option v-for="(value, key) in taskGroups" v-bind:value="key" v-bind:style="{ 'background-color': value }">
+              {{ key }}
+            </option>
+          </select>
         </div>
       </div>
       <div v-on:click="onLeftClick()" v-click-outside="addNewTask" class="task">
@@ -40,7 +47,7 @@
         </div>
         <textarea ref="message" v-on:input="textAreaAdjust()" v-model="newTaskText" placeholder="Add a task" aria-label="Add a task" class="task-textarea"></textarea>
       </div>
-      <!-- button v-on:click="addAllTasks()">Add all tasks</button -->
+      <!-- button v-on:click="addAllTasks()">Add developer tasks</button -->
       <div v-if="compactMode">
         <div v-for="task in tasksByPriority" :key="task._id">
           <compact-task-item
@@ -48,6 +55,7 @@
             @update:text="val => { task.text = val; }"
             :activity-counter="task.activityCounter"
             v-on:activity="onTaskActivity(task._id)"
+            :color="taskGroups[task.group]"
           ></compact-task-item>
         </div>
       </div>
@@ -68,6 +76,7 @@
             v-on:remove="deleteTask(task._id)"
             v-on:activity="onTaskActivity(task._id)"
             v-on:click.native="onLeftClickTask(task._id)"
+            :color="taskGroups[task.group]"
           ></task-item>
         </div>
       </div>
