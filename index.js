@@ -74,6 +74,7 @@ Vue.directive('click-outside', {
   // - duration is more important: sleep, work - scheduled time
   // - ‎number of repetitions is more important: brush teeth, shower, shave - time elapsed since last repetition
 
+  // TODO:: icons 128 x 128
   // TODO:: color labels - select option - in menu as filter
   // TODO::SOON groups with base priority offset: y = k * x + n
   // - sleep / rest
