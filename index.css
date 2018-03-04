@@ -48,6 +48,11 @@ button {
 .task-top-row-button {
     margin-bottom: 5px;
 }
+.top-menu-button {
+    border: none;
+    padding: 2px;
+    /* margin-bottom: 5px; */
+}
 .task {
     display: inline-block;
     vertical-align: top; /* solution for space under inline-block */

@@ -21,8 +21,15 @@
     <!-- The JSON standard specifies that all key/value pairs should be in double quotes. -->
     <div id="app" class="tasks-vue-app">
       <div class="top-menu">
-        <input type="checkbox" id="compact" v-model="compactMode">
-        <label for="compact">Compact mode</label>
+        <button v-on:click="expandedMenu = !expandedMenu" class="top-menu-button">
+          <img src="icons/menu.png" alt="Menu" title="Menu" height="20" width="20">
+        </button>
+        <span>Priority Task List</span>
+        <div v-if="expandedMenu">
+          <hr>
+          <input type="checkbox" id="compact" v-model="compactMode">
+          <label for="compact">Compact mode</label>
+        </div>
       </div>
       <div v-on:click="onLeftClick()" v-click-outside="addNewTask" class="task">
         <div class="task-top-row">
