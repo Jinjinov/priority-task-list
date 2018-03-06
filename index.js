@@ -75,7 +75,7 @@ Vue.directive('click-outside', {
   // - duration is more important: sleep, work - scheduled time
   // - ‎number of repetitions is more important: brush teeth, shower, shave - time elapsed since last repetition
 
-  // TODO:: color labels - select option - in menu as filter
+  // TODO:: select option is 1px to tall
   // TODO::SOON groups with base priority offset: y = k * x + n
   // - sleep / rest
   // - work
@@ -172,6 +172,7 @@ Vue.component('task-item', {
           <input ref="factor" v-on:input="inputAdjust()" :value="priorityFactor" @input="$emit('update:priority-factor', $event.target.value)" aria-label="Task factor" class="task-top-row-input" />
         </span>
         <span v-if="expanded" class="task-top-row-span">
+          <img src="icons/tag.png" alt="Task group" title="Task group" height="20" width="20">
           <select :value="group" @input="$emit('update:group', $event.target.value)">
             <option v-for="(value, key) in this.$parent.taskGroups" v-bind:value="key" v-bind:style="{ 'background-color': value }">
               {{ key }}
@@ -360,6 +361,8 @@ new Vue({
         }
         
         if(this.newTaskText == "") {
+          this.newTaskGroup = "all";
+          this.newTaskFactor = 1;
           return;
         }
 
@@ -367,6 +370,7 @@ new Vue({
         this.$pouchdbRefs.prioritytasklist.put('task', task);
 
         this.newTaskText = "";
+        this.newTaskGroup = "all";
         this.newTaskFactor = 1;
       },
       onLeftClick() {
