@@ -113,7 +113,7 @@ Vue.component('compact-task-item', {
 
   template: `
     <div class="task-compact" v-bind:style="{ 'background-color': color }">
-      <textarea ref="message" v-on:input="textAreaAdjust()" :value="text" @input="$emit('update:text', $event.target.value)" aria-label="Task text" class="task-compact-textarea"></textarea>
+      <textarea ref="message" v-on:input="textAreaAdjust()" :value="text" @input="$emit('update:text', $event.target.value)" aria-label="Task text" class="task-compact-textarea" v-bind:style="{ 'background-color': color }"></textarea>
       <button v-on:click="$emit('activity')">
         <img src="icons/count.png" alt="Number of times task was completed" title="Number of times task was completed" height="20" width="20">{{ activityCounter }}x
       </button>
@@ -182,7 +182,7 @@ Vue.component('task-item', {
           <img src="icons/delete.png" alt="Delete task" title="Delete task" height="20" width="20">
         </button>
       </div>
-      <textarea ref="message" v-on:input="textAreaAdjust()" :value="text" @input="$emit('update:text', $event.target.value)" aria-label="Task text" class="task-textarea"></textarea>
+      <textarea ref="message" v-on:input="textAreaAdjust()" :value="text" @input="$emit('update:text', $event.target.value)" aria-label="Task text" class="task-textarea" v-bind:style="{ 'background-color': color }"></textarea>
     </div>
   `,
 
@@ -287,13 +287,13 @@ new Vue({
 
       selectedGroup: 'all',
       taskGroups: {
-        'all': "gray",
-        'relax / enjoy': "red",
-        'cook / eat': "orange",
-        'chores': "yellow",
-        'mind': "purple",
-        'grooming': "green",
-        'body': "blue"
+        'all': "lightgray",
+        'relax / enjoy': "#d7fea8",
+        'cook / eat': "#fefea6",
+        'chores': "#feda9c",
+        'mind': "#9ec2fe",
+        'grooming': "#bafeee",
+        'body': "#9ce0fe"
       }
     },
     //-------------------------------------------------------------------------

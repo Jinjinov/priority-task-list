@@ -45,7 +45,7 @@
             <input ref="factor" v-on:input="inputAdjust()" v-model="newTaskFactor" aria-label="Task factor" class="task-top-row-input" />
           </span>
         </div>
-        <textarea ref="message" v-on:input="textAreaAdjust()" v-model="newTaskText" placeholder="Add a task" aria-label="Add a task" class="task-textarea"></textarea>
+        <textarea ref="message" v-on:input="textAreaAdjust()" v-model="newTaskText" placeholder="Add a task" aria-label="Add a task" class="task-textarea" v-bind:style="{ 'background-color': 'white' }"></textarea>
       </div>
       <!-- button v-on:click="addAllTasks()">Add developer tasks</button -->
       <div v-if="compactMode">

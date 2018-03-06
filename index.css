@@ -79,6 +79,6 @@ button {
 .tasks-vue-app {
     min-height: 100%;
     padding: 0 10px;
-    background-color: gray;
+    background-color: #e8e8e8;
     box-sizing: border-box;
 }
