@@ -363,7 +363,7 @@ new Vue({
           return;
         }
 
-        var task = new Task(this.newTaskText, this.newTaskFactor);
+        var task = new Task(this.newTaskText, this.newTaskFactor, this.newTaskGroup);
         this.$pouchdbRefs.prioritytasklist.put('task', task);
 
         this.newTaskText = "";
