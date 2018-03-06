@@ -64,6 +64,8 @@
           <task-item
             :text="task.text"
             @update:text="val => { task.text = val; }"
+            :group="task.group"
+            @update:group="val => { task.group = val; }"
             :priority="task.priority"
             :priority-factor="task.priorityFactor"
             @update:priority-factor="val => { task.priorityFactor = val; }"

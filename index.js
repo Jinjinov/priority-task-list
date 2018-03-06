@@ -171,6 +171,13 @@ Vue.component('task-item', {
           <img src="icons/increase.png" alt="Task priority increase" title="Task priority increase" height="20" width="20">
           <input ref="factor" v-on:input="inputAdjust()" :value="priorityFactor" @input="$emit('update:priority-factor', $event.target.value)" aria-label="Task factor" class="task-top-row-input" />
         </span>
+        <span v-if="expanded" class="task-top-row-span">
+          <select :value="group" @input="$emit('update:group', $event.target.value)">
+            <option v-for="(value, key) in this.$parent.taskGroups" v-bind:value="key" v-bind:style="{ 'background-color': value }">
+              {{ key }}
+            </option>
+          </select>
+        </span>
         <button v-if="expanded" v-on:click="$emit('toggle')" class="task-top-row-button">
           <img v-if="!paused" src="icons/pause.png" alt="Pause task" title="Pause task" height="20" width="20">
           <img v-if="paused" src="icons/play.png" alt="Resume task" title="Resume task" height="20" width="20">
@@ -189,7 +196,7 @@ Vue.component('task-item', {
   // https://vuejs.org/v2/guide/components.html#Form-Input-Components-using-Custom-Events
   // https://vuejs.org/v2/guide/components.html#sync-Modifier
   // https://medium.com/front-end-hacking/vues-v-model-directive-vs-sync-modifier-d1f83957c57c
-  props: ['text', 'priority', 'priorityFactor', 'paused', 'activityCounter', 'lastUpdate', 'lastActivity', 'color'],
+  props: ['text', 'group', 'priority', 'priorityFactor', 'paused', 'activityCounter', 'lastUpdate', 'lastActivity', 'color'],
   data: function () {
     return {
       expanded: false
