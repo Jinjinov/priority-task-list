@@ -13,247 +13,247 @@ var tasks = [
     {
         "group": "grooming",
         "text": "shower",
-        "priorityFactor": 1
+        "priorityFactor": 70
     },
     {
         "group": "grooming",
         "text": "shave",
-        "priorityFactor": 1
+        "priorityFactor": 50
     },
     {
         "group": "grooming",
         "text": "clip nails",
-        "priorityFactor": 1
+        "priorityFactor": 60
     },
     {
         "group": "grooming",
         "text": "brush teeth",
-        "priorityFactor": 1
+        "priorityFactor": 80
     },
     {
         "group": "grooming",
         "text": "floss teeth",
-        "priorityFactor": 1
+        "priorityFactor": 60
     },
     //CHORES - clean:
     {
         "group": "chores",
         "text": "wash clothes, do laundry",
-        "priorityFactor": 1
+        "priorityFactor": 80
     },
     {
         "group": "chores",
         "text": "wash dishes",
-        "priorityFactor": 1
+        "priorityFactor": 70
     },
     {
         "group": "chores",
         "text": "empty trash can",
-        "priorityFactor": 1
+        "priorityFactor": 60
     },
     {
         "group": "chores",
         "text": "clean table",
-        "priorityFactor": 1
+        "priorityFactor": 50
     },
     {
         "group": "chores",
         "text": "clean counter",
-        "priorityFactor": 1
+        "priorityFactor": 50
     },
     {
         "group": "chores",
         "text": "clean floor",
-        "priorityFactor": 1
+        "priorityFactor": 60
     },
     {
         "group": "chores",
         "text": "clean sink",
-        "priorityFactor": 1
+        "priorityFactor": 50
     },
     {
         "group": "chores",
         "text": "clean bathtub",
-        "priorityFactor": 1
+        "priorityFactor": 40
     },
     {
         "group": "chores",
         "text": "clean tiles on walls",
-        "priorityFactor": 1
+        "priorityFactor": 20
     },
     {
         "group": "chores",
         "text": "clean light switches",
-        "priorityFactor": 1
+        "priorityFactor": 10
     },
     {
         "group": "chores",
         "text": "clean windows",
-        "priorityFactor": 1
+        "priorityFactor": 30
     },
     //BODY - exercise:
     {
         "group": "body",
         "text": "do rehabilitation exercises",
-        "priorityFactor": 1
+        "priorityFactor": 80
     },
     {
         "group": "body",
         "text": "go climbing",
-        "priorityFactor": 1
+        "priorityFactor": 50
     },
     {
         "group": "body",
         "text": "go on walks",
-        "priorityFactor": 1
+        "priorityFactor": 60
     },
     {
         "group": "body",
         "text": "go hiking",
-        "priorityFactor": 1
+        "priorityFactor": 70
     },
     {
         "group": "body",
         "text": "practice handstand",
-        "priorityFactor": 1
+        "priorityFactor": 50
     },
     {
         "group": "body",
         "text": "practice planche",
-        "priorityFactor": 1
+        "priorityFactor": 50
     },
     {
         "group": "body",
         "text": "meditate",
-        "priorityFactor": 1
+        "priorityFactor": 30
     },
     {
         "group": "body",
         "text": "do martial arts",
-        "priorityFactor": 1
+        "priorityFactor": 10
     },
     //MIND - progress, be productive, learn, build:
     {
         "group": "mind",
         "text": "read programming boks",
-        "priorityFactor": 1
+        "priorityFactor": 40
     },
     {
         "group": "mind",
         "text": "read programming tutorials",
-        "priorityFactor": 1
+        "priorityFactor": 50
     },
     {
         "group": "mind",
         "text": "program on a project",
-        "priorityFactor": 1
+        "priorityFactor": 70
     },
     {
         "group": "mind",
         "text": "build a web site",
-        "priorityFactor": 1
+        "priorityFactor": 80
     },
     {
         "group": "mind",
         "text": "build a calisthenics park",
-        "priorityFactor": 1
+        "priorityFactor": 60
     },
     {
         "group": "mind",
         "text": "play mahjong",
-        "priorityFactor": 1
+        "priorityFactor": 30
     },
     {
         "group": "mind",
         "text": "play go",
-        "priorityFactor": 1
+        "priorityFactor": 40
     },
     {
         "group": "mind",
         "text": "play shogi",
-        "priorityFactor": 1
+        "priorityFactor": 40
     },
     {
         "group": "mind",
         "text": "draw pencil drawings",
-        "priorityFactor": 1
+        "priorityFactor": 10
     },
     {
         "group": "mind",
         "text": "write fantasy stories",
-        "priorityFactor": 1
+        "priorityFactor": 20
     },
     //RELAX / ENJOY - relax, enjoy:
     {
         "group": "relax / enjoy",
         "text": "dance salsa",
-        "priorityFactor": 1
+        "priorityFactor": 60
     },
     {
         "group": "relax / enjoy",
         "text": "watch movies",
-        "priorityFactor": 1
+        "priorityFactor": 40
     },
     {
         "group": "relax / enjoy",
         "text": "watch tv series",
-        "priorityFactor": 1
+        "priorityFactor": 50
     },
     {
         "group": "relax / enjoy",
         "text": "play video games",
-        "priorityFactor": 1
+        "priorityFactor": 40
     },
     {
         "group": "relax / enjoy",
         "text": "read fantasy novels",
-        "priorityFactor": 1
+        "priorityFactor": 70
     },
     {
         "group": "relax / enjoy",
         "text": "watch anime",
-        "priorityFactor": 1
+        "priorityFactor": 40
     },
     {
         "group": "relax / enjoy",
         "text": "read manga",
-        "priorityFactor": 1
+        "priorityFactor": 50
     },
     //vacation:
     {
         "group": "relax / enjoy",
         "text": "go mountain biking",
-        "priorityFactor": 1
+        "priorityFactor": 40
     },
     {
         "group": "relax / enjoy",
         "text": "go windsurfing",
-        "priorityFactor": 1
+        "priorityFactor": 20
     },
     {
         "group": "relax / enjoy",
         "text": "go snowboarding",
-        "priorityFactor": 1
+        "priorityFactor": 30
     },
     //COOK / EAT - food:
     {
         "group": "cook / eat",
         "text": "eat many meals",
-        "priorityFactor": 1
+        "priorityFactor": 70
     },
     {
         "group": "cook / eat",
         "text": "drink lots of water",
-        "priorityFactor": 1
+        "priorityFactor": 80
     },
     {
         "group": "cook / eat",
         "text": "eat many fruits",
-        "priorityFactor": 1
+        "priorityFactor": 80
     },
     {
         "group": "cook / eat",
         "text": "eat many vegetables",
-        "priorityFactor": 1
+        "priorityFactor": 60
     }
 ];
