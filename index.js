@@ -75,7 +75,8 @@ Vue.directive('click-outside', {
   // - duration is more important: sleep, work - scheduled time
   // - ‎number of repetitions is more important: brush teeth, shower, shave - time elapsed since last repetition
 
-  // TODO:: select option is 1px to tall
+  // TODO:: tasks priorities
+  
   // TODO::SOON groups with base priority offset: y = k * x + n
   // - sleep / rest
   // - work
@@ -168,10 +169,10 @@ Vue.component('task-item', {
           <img src="icons/count.png" alt="Number of times task was completed" title="Number of times task was completed" height="20" width="20">{{ activityCounter }}x
         </span>
         <span v-if="expanded" class="task-top-row-span">
-          <img src="icons/increase.png" alt="Task priority increase" title="Task priority increase" height="20" width="20">
-          <input ref="factor" v-on:input="inputAdjust()" :value="priorityFactor" @input="$emit('update:priority-factor', $event.target.value)" aria-label="Task factor" class="task-top-row-input" />
+          <img src="icons/increase.png" alt="Task priority factor" title="Task priority factor" height="20" width="20">
+          <input ref="factor" v-on:input="inputAdjust()" :value="priorityFactor" @input="$emit('update:priority-factor', $event.target.value)" aria-label="Task factor" class="task-top-row-input" />%
         </span>
-        <span v-if="expanded" class="task-top-row-span">
+        <span v-if="expanded" class="task-top-row-span-select">
           <img src="icons/tag.png" alt="Task group" title="Task group" height="20" width="20">
           <select :value="group" @input="$emit('update:group', $event.target.value)">
             <option v-for="(value, key) in this.$parent.taskGroups" v-bind:value="key" v-bind:style="{ 'background-color': value }">
@@ -274,10 +275,11 @@ new Vue({
     data: {
       selectedTaskKey: -1,
       newTaskText: '',
-      newTaskFactor: 1,
+      newTaskFactor: 50,
       newTaskGroup: 'all',
       expanded: false,
       expandedMenu: false,
+      expandedHelp: false,
       compactMode: false,
 
       // sleep - light blue
@@ -362,7 +364,7 @@ new Vue({
         
         if(this.newTaskText == "") {
           this.newTaskGroup = "all";
-          this.newTaskFactor = 1;
+          this.newTaskFactor = 50;
           return;
         }
 
@@ -371,7 +373,7 @@ new Vue({
 
         this.newTaskText = "";
         this.newTaskGroup = "all";
-        this.newTaskFactor = 1;
+        this.newTaskFactor = 50;
       },
       onLeftClick() {
         this.expanded = true;

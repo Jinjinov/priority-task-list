@@ -38,10 +38,23 @@ button {
     border: none;
     vertical-align: top;
 }
+.task-help {
+    display: block;
+    padding: 2px 5px;
+    background-color: gainsboro;
+    margin-bottom: 5px;
+}
 .task-top-row-span {
     vertical-align: top;
     display: inline-block;
     padding: 2px 5px;
+    background-color: gainsboro;
+    margin-bottom: 5px;
+}
+.task-top-row-span-select {
+    vertical-align: top;
+    display: inline-block;
+    padding: 2px 5px 1px 5px;
     background-color: gainsboro;
     margin-bottom: 5px;
 }

@@ -9,6 +9,10 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="#448AFF">
     <meta name="apple-mobile-web-app-title" content="Priority Task List">
 
+    <meta name="description" content="Priority Task List">
+    <meta name="keywords" content="Task list, TODO list, Priority list, Prioritized activity list, SPA, PWA, Single page application, Progressive web app">
+    <meta name="author" content="Jinjinov">
+
     <title>Priority Task List</title>
     
     <link rel="icon" href="favicon.ico" type="image/x-icon"/> <!-- 30 kb -->
@@ -36,15 +40,50 @@
               {{ key }}
             </option>
           </select>
+          <hr>
+          <button v-on:click="expandedHelp = !expandedHelp" class="top-menu-button" id="help">
+            <img src="icons/help.png" alt="Help" title="Help" height="20" width="20">
+          </button>
+          <label for="help">Help</label>
+          <div v-if="expandedHelp">
+              <br>
+              <span class="task-help">
+                <img src="icons/priority.png" alt="Task priority" title="Task priority" height="20" width="20"> Task priority
+              </span>
+              <span class="task-help">
+                <img src="icons/age.png" alt="Time since task was last completed" title="Time since task was last completed" height="20" width="20"> Time since task was last completed
+                <br>
+                <img src="icons/week.png" alt="Weeks since task was last completed" title="Weeks since task was last completed" height="20" width="20"> Weeks since task was last completed
+                <br>
+                <img src="icons/day.png" alt="Days since task was last completed" title="Days since task was last completed" height="20" width="20"> Days since task was last completed
+              </span>
+              <span class="task-help">
+                <img src="icons/count.png" alt="Number of times task was completed" title="Number of times task was completed" height="20" width="20"> Number of times task was completed
+              </span>
+              <span class="task-help">
+                <img src="icons/increase.png" alt="Task priority factor" title="Task priority factor" height="20" width="20"> Task priority factor
+              </span>
+              <span class="task-help">
+                <img src="icons/tag.png" alt="Task group" title="Task group" height="20" width="20"> Task group
+              </span>
+              <span class="task-help">
+                <img src="icons/pause.png" alt="Pause task" title="Pause task" height="20" width="20"> Pause task
+                <br>
+                <img src="icons/play.png" alt="Resume task" title="Resume task" height="20" width="20"> Resume task
+              </span>
+              <span class="task-help">
+                <img src="icons/delete.png" alt="Delete task" title="Delete task" height="20" width="20"> Delete task
+              </span>
+          </div>
         </div>
       </div>
       <div v-on:click="onLeftClick()" v-click-outside="addNewTask" class="task" v-bind:style="{ 'background-color': taskGroups[newTaskGroup] }">
         <div class="task-top-row">
           <span v-if="expanded" class="task-top-row-span">
-            <img src="icons/increase.png" alt="Task priority increase" title="Task priority increase" height="20" width="20">
-            <input ref="factor" v-on:input="inputAdjust()" v-model="newTaskFactor" aria-label="Task factor" class="task-top-row-input" />
+            <img src="icons/increase.png" alt="Task priority factor" title="Task priority factor" height="20" width="20">
+            <input ref="factor" v-on:input="inputAdjust()" v-model="newTaskFactor" aria-label="Task factor" class="task-top-row-input" />%
           </span>
-          <span v-if="expanded" class="task-top-row-span">
+          <span v-if="expanded" class="task-top-row-span-select">
             <img src="icons/tag.png" alt="Task group" title="Task group" height="20" width="20">
             <select v-model="newTaskGroup">
               <option v-for="(value, key) in taskGroups" v-bind:value="key" v-bind:style="{ 'background-color': value }">
