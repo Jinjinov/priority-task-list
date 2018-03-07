@@ -93,10 +93,14 @@ Vue.directive('click-outside', {
 
   // TODO:: #1 parse URL
   // https://github.com/SoapBox/linkifyjs
+  // https://github.com/nfrasser/linkify-shim/blob/master/linkify.min.js
   // https://github.com/phanan/vue-linkify
+
+  // https://github.com/egoist/autolink.js
+  // https://github.com/vue-component/vue-autolink
+
   // https://github.com/bryanwoods/autolink-js/blob/master/autolink-min.js
   // https://github.com/alexcorvi/anchorme.js/blob/gh-pages/dist-browser/anchorme.min.js
-  // https://github.com/nfrasser/linkify-shim/blob/master/linkify.min.js
   // https://github.com/gregjacobs/Autolinker.js/blob/master/dist/Autolinker.min.js
   // https://github.com/ljosa/urlize.js/blob/master/urlize.js
   

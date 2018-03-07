@@ -38,13 +38,14 @@ If you skip the task, you will just get another alert in 2 days and if you skip 
 
 ## TODO:
 
-- pause task priority growth
-- compact mode - one row per task
+- ~~pause task priority growth~~
+- ~~compact mode - one row per task~~
+- ~~color labels~~
 <!-- -->
-- color labels
+- vue-autolink - https://github.com/vue-component/vue-autolink
 - repeat interval
 - scheduled time / date
-- vue-linkify - https://github.com/phanan/vue-linkify
+- ~~vue-linkify~~ - https://github.com/phanan/vue-linkify
 - vue-authenticate - https://github.com/dgrubelic/vue-authenticate
 - one database per user - https://gist.github.com/nolanlawson/9676093
 - groups with base priority offset
