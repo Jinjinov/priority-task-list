@@ -25,6 +25,10 @@ button {
     border-width: 1px; /* chrome - firefox */
     padding: 1px 5px;
 }
+.task-formatted-textarea {
+    white-space: pre-wrap;
+    padding: 2px;
+}
 .task-textarea {
     resize: none;
     display: block; /* solution for space under textarea */
@@ -36,16 +40,10 @@ button {
     overflow-y: hidden; /* hide scrollbar */
 }
 .task-compact-textarea {
-    resize: none;
-    flex: 1; /*take all the available space*/
+    white-space: pre-wrap;
+    padding: 2px;
+    flex: 1; /* take all the available space */
     margin-right: 5px;
-    /* display: block; /* solution for space under textarea */
-    /* vertical-align: top; /* solution for space under textarea */
-    /* width: 100%; */
-    border: none;
-    background-color: silver;
-    box-sizing: border-box;
-    overflow-y: hidden; /* hide scrollbar */
 }
 .task-top-row-input {
     border: none;

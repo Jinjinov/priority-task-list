@@ -98,17 +98,14 @@ Vue.directive('click-outside', {
   // TODO::LATER completed: too soon / on time / too late --> auto priority adjustment
   // TODO::LATER suggested priority
 
-  // TODO:: #0 change <textarea> to <div contenteditable="true">
-  // TODO:: #1 parse URL
-  
-  // https://stackoverflow.com/questions/37684/how-to-replace-plain-urls-with-links
-
   // https://stackoverflow.com/questions/19214453/rich-text-editor-replacement-for-html-textarea
   // https://stackoverflow.com/questions/17785845/convert-html-tag-in-textarea-to-rich-text
   // https://stackoverflow.com/questions/2580247/can-i-embed-html-formatting-inside-of-a-textarea-tag
   // https://stackoverflow.com/questions/10404312/html5-rich-text-inside-textarea
-
   // https://github.com/guardian/scribe
+
+  // TODO:: #1 parse URL
+  // https://stackoverflow.com/questions/37684/how-to-replace-plain-urls-with-links
 
   // https://github.com/SoapBox/linkifyjs
   // https://github.com/nfrasser/linkify-shim/blob/master/linkify.min.js
@@ -134,24 +131,14 @@ Vue.component('compact-task-item', {
 
   template: `
     <div class="task-compact" v-bind:style="{ 'background-color': color }">
-      <textarea ref="message" v-on:input="textAreaAdjust()" :value="text" @input="$emit('update:text', $event.target.value)" aria-label="Task text" class="task-compact-textarea" v-bind:style="{ 'background-color': color }"></textarea>
+      <div aria-label="Task text" class="task-compact-textarea" v-bind:style="{ 'background-color': color }">{{ text }}</div>
       <button v-on:click="$emit('activity')">
         <img src="icons/count.png" alt="Number of times task was completed" title="Number of times task was completed" height="20" width="20">{{ activityCounter }}x
       </button>
     </div>
   `,
 
-  props: ['text', 'activityCounter', 'color'],
-  methods: {
-    textAreaAdjust() {
-      var o = this.$refs.message;
-      o.style.height = "1px";
-      o.style.height = (o.scrollHeight)+"px";
-    }
-  },
-  mounted(){
-    this.textAreaAdjust();
-  }
+  props: ['text', 'activityCounter', 'color']
 })
 
 //-------------------------------------------------------------------------
@@ -211,7 +198,8 @@ Vue.component('task-item', {
           <img src="icons/delete.png" alt="Delete task" title="Delete task" height="20" width="20">
         </button>
       </div>
-      <textarea ref="message" v-on:input="textAreaAdjust()" :value="text" @input="$emit('update:text', $event.target.value)" aria-label="Task text" class="task-textarea" v-bind:style="{ 'background-color': color }"></textarea>
+      <textarea v-if="expanded" ref="message" v-on:input="textAreaAdjust()" :value="text" @input="$emit('update:text', $event.target.value)" aria-label="Task text" class="task-textarea" v-bind:style="{ 'background-color': color }"></textarea>
+      <div v-else aria-label="Task text" class="task-formatted-textarea" v-bind:style="{ 'background-color': color }">{{ text }}</div>
     </div>
   `,
 
@@ -257,6 +245,7 @@ Vue.component('task-item', {
 
       this.$nextTick(() => {
         this.inputAdjust();
+        this.textAreaAdjust();
       })
     },
     onClickOutside() {
@@ -269,6 +258,7 @@ Vue.component('task-item', {
       var o = this.$refs.message;
       o.style.height = "1px";
       o.style.height = (o.scrollHeight)+"px";
+      o.focus(); // TODO:: only on div click
     },
     inputAdjust() {
       var o = this.$refs.factor;
@@ -280,7 +270,7 @@ Vue.component('task-item', {
     }
   },
   mounted(){
-    this.textAreaAdjust();
+    // this.textAreaAdjust();
   }
 })
 
