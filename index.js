@@ -58,14 +58,10 @@ Vue.directive('click-outside', {
   },
 });
 
-  // TODO:: fix css for firefox
-
   // https://stackoverflow.com/questions/2954659/css-size-of-buttons-in-chrome-is-different-than-firefox
-  
   // https://stackoverflow.com/questions/7229568/input-height-differences-in-firefox-and-chrome
   // https://stackoverflow.com/questions/6184210/how-can-i-control-the-height-of-text-inputs-and-submit-input-buttons-in-differen
   // https://stackoverflow.com/questions/18582606/input-field-chrome-and-firefox-shows-different
-
   // https://stackoverflow.com/questions/20477823/select-html-element-with-height
   // https://stackoverflow.com/questions/2547354/how-to-standardize-the-height-of-a-select-box-between-chrome-and-firefox
   
