@@ -2,21 +2,21 @@
 
 Priority Task List is a Progressive Web App (PWA) written with Vue.js and PouchDB
 
-https://github.com/vuejs/vue
+- https://github.com/vuejs/vue
+- https://github.com/pouchdb/pouchdb
+- https://github.com/sadick254/vuepouch
+- https://github.com/apache/couchdb
 
-https://github.com/pouchdb/pouchdb
+## Demo
 
-https://github.com/sadick254/vuepouch
-
-https://github.com/apache/couchdb
+https://jinjinov.github.io/priority-task-list/
 
 ## Why another "Task List" when there are already more than 30 others out there?
 
 Many other task lists allow you to schedule a repeating task:
 
-[ ] Water the cactus | Repeat every 14 days
-
-[ ] Go to the gym | Repeat every 2 days
+- Water the cactus | Repeat every 14 days
+- Go to the gym | Repeat every 2 days
 
 If you skip the task, you will just get another alert in 2 days and if you skip many tasks, you will get many more alerts. This constant nagging (and ignoring) isn't very motivational. When you finally manage to complete one task the sense of reward feels shallow because now you have many ✕ and one ✓ for that task on your calendar. **Most importantly:** you have no obvious clue about which task you are negelecting the most (until you check all the tasks).
 
