@@ -58,6 +58,17 @@ Vue.directive('click-outside', {
   },
 });
 
+  // TODO:: fix css for firefox
+
+  // https://stackoverflow.com/questions/2954659/css-size-of-buttons-in-chrome-is-different-than-firefox
+  
+  // https://stackoverflow.com/questions/7229568/input-height-differences-in-firefox-and-chrome
+  // https://stackoverflow.com/questions/6184210/how-can-i-control-the-height-of-text-inputs-and-submit-input-buttons-in-differen
+  // https://stackoverflow.com/questions/18582606/input-field-chrome-and-firefox-shows-different
+
+  // https://stackoverflow.com/questions/20477823/select-html-element-with-height
+  // https://stackoverflow.com/questions/2547354/how-to-standardize-the-height-of-a-select-box-between-chrome-and-firefox
+  
   // TODO:: pwa - chrome developer tools - audit - lighthouse:
   // HTTPS
   // HTTP/2
@@ -91,7 +102,18 @@ Vue.directive('click-outside', {
   // TODO::LATER completed: too soon / on time / too late --> auto priority adjustment
   // TODO::LATER suggested priority
 
+  // TODO:: #0 change <textarea> to <div contenteditable="true">
   // TODO:: #1 parse URL
+  
+  // https://stackoverflow.com/questions/37684/how-to-replace-plain-urls-with-links
+
+  // https://stackoverflow.com/questions/19214453/rich-text-editor-replacement-for-html-textarea
+  // https://stackoverflow.com/questions/17785845/convert-html-tag-in-textarea-to-rich-text
+  // https://stackoverflow.com/questions/2580247/can-i-embed-html-formatting-inside-of-a-textarea-tag
+  // https://stackoverflow.com/questions/10404312/html5-rich-text-inside-textarea
+
+  // https://github.com/guardian/scribe
+
   // https://github.com/SoapBox/linkifyjs
   // https://github.com/nfrasser/linkify-shim/blob/master/linkify.min.js
   // https://github.com/phanan/vue-linkify
@@ -172,9 +194,9 @@ Vue.component('task-item', {
         </span>
         <span v-if="expanded" class="task-top-row-span">
           <img src="icons/increase.png" alt="Task priority factor" title="Task priority factor" height="20" width="20">
-          <input ref="factor" v-on:input="inputAdjust()" :value="priorityFactor" @input="$emit('update:priority-factor', $event.target.value)" aria-label="Task factor" class="task-top-row-input" />%
+          <input type="text" ref="factor" v-on:input="inputAdjust()" :value="priorityFactor" @input="$emit('update:priority-factor', $event.target.value)" aria-label="Task factor" class="task-top-row-input" />%
         </span>
-        <span v-if="expanded" class="task-top-row-span-select">
+        <span v-if="expanded" class="task-top-row-span">
           <img src="icons/tag.png" alt="Task group" title="Task group" height="20" width="20">
           <select :value="group" @input="$emit('update:group', $event.target.value)">
             <option v-for="(value, key) in this.$parent.taskGroups" v-bind:value="key" v-bind:style="{ 'background-color': value }">
@@ -299,7 +321,7 @@ new Vue({
 
       selectedGroup: 'all',
       taskGroups: {
-        'all': "lightgray",
+        'all': "silver",
         'relax / enjoy': "#d7fea8",
         'cook / eat': "#fefea6",
         'chores': "#feda9c",

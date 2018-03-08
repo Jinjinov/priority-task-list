@@ -9,8 +9,19 @@ body {
 img {
     vertical-align: bottom; /* solution for space under image */
 }
+input[type="text"] {
+    height: 18px; /* chrome - firefox */
+    line-height: 18px; /* chrome - firefox */
+}
+select {
+    vertical-align: top;
+    height: 20px; /* chrome - firefox */
+    line-height: 20px; /* chrome - firefox */
+}
 button {
-    padding: 0 5px;
+    background-color: gainsboro; /* chrome - firefox */
+    border-width: 1px; /* chrome - firefox */
+    padding: 1px 5px;
 }
 .task-textarea {
     resize: none;
@@ -51,6 +62,7 @@ button {
     background-color: gainsboro;
     margin-bottom: 5px;
 }
+/*
 .task-top-row-span-select {
     vertical-align: top;
     display: inline-block;
@@ -58,6 +70,7 @@ button {
     background-color: gainsboro;
     margin-bottom: 5px;
 }
+/**/
 .task-top-row-button {
     margin-bottom: 5px;
 }
