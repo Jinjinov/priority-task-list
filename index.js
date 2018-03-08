@@ -104,20 +104,21 @@ Vue.directive('click-outside', {
   // https://stackoverflow.com/questions/10404312/html5-rich-text-inside-textarea
   // https://github.com/guardian/scribe
 
-  // TODO:: #1 parse URL
   // https://stackoverflow.com/questions/37684/how-to-replace-plain-urls-with-links
 
   // https://github.com/SoapBox/linkifyjs
-  // https://github.com/nfrasser/linkify-shim/blob/master/linkify.min.js
+  // https://github.com/nfrasser/linkify-shim/blob/master/linkify-html.js - 23.5 KB - optional
+  // https://github.com/nfrasser/linkify-shim/blob/master/linkify-string.js - 2.5 KB - optional
+  // https://github.com/nfrasser/linkify-shim/blob/master/linkify.js - 47.7 KB - required
   // https://github.com/phanan/vue-linkify
 
-  // https://github.com/egoist/autolink.js
+  // https://github.com/egoist/autolink.js - 3.47 KB
   // https://github.com/vue-component/vue-autolink
 
-  // https://github.com/bryanwoods/autolink-js/blob/master/autolink-min.js
-  // https://github.com/alexcorvi/anchorme.js/blob/gh-pages/dist-browser/anchorme.min.js
-  // https://github.com/gregjacobs/Autolinker.js/blob/master/dist/Autolinker.min.js
-  // https://github.com/ljosa/urlize.js/blob/master/urlize.js
+  // https://github.com/bryanwoods/autolink-js/blob/master/autolink-min.js - 578 Bytes
+  // https://github.com/alexcorvi/anchorme.js/blob/gh-pages/dist-browser/anchorme.min.js - 18.5 KB - hardcoded url
+  // https://github.com/gregjacobs/Autolinker.js/blob/master/dist/Autolinker.min.js - 36.7 KB - hardcoded url
+  // https://github.com/ljosa/urlize.js/blob/master/urlize.js - 11.3 KB
   
   // TODO::LATER update github Projects
   // TODO::LATER update github Wiki
@@ -131,14 +132,20 @@ Vue.component('compact-task-item', {
 
   template: `
     <div class="task-compact" v-bind:style="{ 'background-color': color }">
-      <div aria-label="Task text" class="task-compact-textarea" v-bind:style="{ 'background-color': color }">{{ text }}</div>
+      <div v-html="autolinkedText" aria-label="Task text" class="task-compact-textarea" v-bind:style="{ 'background-color': color }"></div>
       <button v-on:click="$emit('activity')">
         <img src="icons/count.png" alt="Number of times task was completed" title="Number of times task was completed" height="20" width="20">{{ activityCounter }}x
       </button>
     </div>
   `,
 
-  props: ['text', 'activityCounter', 'color']
+  props: ['text', 'activityCounter', 'color'],
+
+  computed: {
+    autolinkedText() {
+      return this.text.autoLink({ target: "_blank" });
+    }
+  }
 })
 
 //-------------------------------------------------------------------------
@@ -199,7 +206,7 @@ Vue.component('task-item', {
         </button>
       </div>
       <textarea v-if="expanded" ref="message" v-on:input="textAreaAdjust()" :value="text" @input="$emit('update:text', $event.target.value)" aria-label="Task text" class="task-textarea" v-bind:style="{ 'background-color': color }"></textarea>
-      <div v-else aria-label="Task text" class="task-formatted-textarea" v-bind:style="{ 'background-color': color }">{{ text }}</div>
+      <div v-else v-html="autolinkedText" aria-label="Task text" class="task-formatted-textarea" v-bind:style="{ 'background-color': color }"></div>
     </div>
   `,
 
@@ -213,6 +220,9 @@ Vue.component('task-item', {
     }
   },
   computed: {
+    autolinkedText() {
+      return this.text.autoLink({ target: "_blank" });
+    },
     timeSinceLastActivity() {
       //return new Date(new Date(this.lastUpdate) - new Date(this.lastActivity)).toLocaleTimeString('en-GB');
       
@@ -241,7 +251,7 @@ Vue.component('task-item', {
   },
   methods: {
     onLeftClick() {
-      this.expanded = true;
+      this.expanded = true; // TODO:: not on url click
 
       this.$nextTick(() => {
         this.inputAdjust();

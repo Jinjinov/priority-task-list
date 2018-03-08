@@ -7,6 +7,7 @@ var urlstocache = [
   'index.html',
   'index.js',
   'vuepouch.js',
+  'autolink-min.js',
   'icons/age.png',
   'icons/count.png',
   'icons/day.png',
