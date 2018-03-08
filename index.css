@@ -17,6 +17,8 @@ select {
     vertical-align: top;
     height: 20px; /* chrome - firefox */
     line-height: 20px; /* chrome - firefox */
+    border: 0; /* chrome - firefox */
+    padding: 0; /* chrome - firefox */
 }
 button {
     background-color: gainsboro; /* chrome - firefox */
