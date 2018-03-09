@@ -204,6 +204,9 @@ Vue.component('task-item', {
         <button v-if="expanded" v-on:click="$emit('remove')" class="task-top-row-button">
           <img src="icons/delete.png" alt="Delete task" title="Delete task" height="20" width="20">
         </button>
+        <button v-if="expanded" v-on:click="$emit('save')" class="task-top-row-button">
+          <img src="icons/save.png" alt="Save task" title="Save task" height="20" width="20">
+        </button>
       </div>
       <textarea v-if="expanded" ref="message" v-on:input="textAreaAdjust()" :value="text" @input="$emit('update:text', $event.target.value)" aria-label="Task text" class="task-textarea" v-bind:style="{ 'background-color': color }"></textarea>
       <div v-else v-html="autolinkedText" aria-label="Task text" class="task-formatted-textarea" v-bind:style="{ 'background-color': color }"></div>
