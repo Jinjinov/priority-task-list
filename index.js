@@ -68,6 +68,7 @@ Vue.directive('click-outside', {
   // TODO:: pwa - chrome developer tools - audit - lighthouse:
   // HTTPS
   // HTTP/2
+  // TODO:: development mode -> production mode
 
   // TODO::LATER sign in: using Google, Facebook, Twitter, ...
   // - https://github.com/websanova/vue-auth
@@ -123,7 +124,6 @@ Vue.directive('click-outside', {
   // TODO::LATER update github Projects
   // TODO::LATER update github Wiki
   // TODO::LATER update github Insights / Community
-  // TODO::LATER update github Pages -> demo version
 
 //-------------------------------------------------------------------------
 // compact-task-item
@@ -280,7 +280,7 @@ Vue.component('task-item', {
       var o = this.$refs.message;
       o.style.height = "1px";
       o.style.height = (o.scrollHeight)+"px";
-      o.focus(); // TODO::LATER only on div click
+      o.focus(); // TODO:: always or only on div click?
     },
     inputAdjust() {
       var o = this.$refs.factor;
