@@ -32,9 +32,9 @@
         <div v-if="expandedMenu">
           <hr>
           <input type="checkbox" id="compact" v-model="compactMode">
-          <label for="compact">Compact mode</label>
+          <label for="compact">Compact display</label>
           <br>
-          <label for="group">Group:</label>
+          <label for="group">Group filter:</label>
           <select v-model="selectedGroup" id="group">
             <option v-for="(value, key) in taskGroups" v-bind:value="key" v-bind:style="{ 'background-color': value }">
               {{ key }}

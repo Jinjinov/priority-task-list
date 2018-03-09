@@ -143,7 +143,7 @@ Vue.component('compact-task-item', {
 
   computed: {
     autolinkedText() {
-      return this.text.autoLink({ target: "_blank" });
+      return this.text.autoLink({ target: "_blank", onclick: "event.stopPropagation();" });
     }
   }
 })
@@ -224,7 +224,7 @@ Vue.component('task-item', {
   },
   computed: {
     autolinkedText() {
-      return this.text.autoLink({ target: "_blank" });
+      return this.text.autoLink({ target: "_blank", onclick: "event.stopPropagation();" });
     },
     timeSinceLastActivity() {
       //return new Date(new Date(this.lastUpdate) - new Date(this.lastActivity)).toLocaleTimeString('en-GB');
@@ -254,12 +254,21 @@ Vue.component('task-item', {
   },
   methods: {
     onLeftClick() {
-      this.expanded = true; // TODO:: not on url click
+      if(!this.expanded) {
+        this.expanded = true;
+        
+        // https://stackoverflow.com/questions/44245494/reinvoking-vue-js-html-parsing
+        // https://stackoverflow.com/questions/39516731/dynamic-html-elements-in-vue-js
 
-      this.$nextTick(() => {
-        this.inputAdjust();
-        this.textAreaAdjust();
-      })
+        // https://stackoverflow.com/questions/1997084/prevent-parent-container-click-event-from-firing-when-hyperlink-clicked
+        // https://stackoverflow.com/questions/30536571/vuejs-prevent-default-on-link-click-but-also-capture-object
+        // https://vuejs.org/v2/guide/events.html
+
+        this.$nextTick(() => {
+          this.inputAdjust();
+          this.textAreaAdjust();
+        })
+      }
     },
     onClickOutside() {
       if(this.expanded) {
@@ -271,7 +280,7 @@ Vue.component('task-item', {
       var o = this.$refs.message;
       o.style.height = "1px";
       o.style.height = (o.scrollHeight)+"px";
-      o.focus(); // TODO:: only on div click
+      o.focus(); // TODO::LATER only on div click
     },
     inputAdjust() {
       var o = this.$refs.factor;
@@ -383,27 +392,29 @@ new Vue({
       addNewTask() {
         if(this.expanded) {
           this.expanded = false;
-        }
         
-        if(this.newTaskText == "") {
+          if(this.newTaskText == "") {
+            this.newTaskGroup = "all";
+            this.newTaskFactor = 50;
+            return;
+          }
+
+          var task = new Task(this.newTaskText, this.newTaskFactor, this.newTaskGroup);
+          this.$pouchdbRefs.prioritytasklist.put('task', task);
+
+          this.newTaskText = "";
           this.newTaskGroup = "all";
           this.newTaskFactor = 50;
-          return;
         }
-
-        var task = new Task(this.newTaskText, this.newTaskFactor, this.newTaskGroup);
-        this.$pouchdbRefs.prioritytasklist.put('task', task);
-
-        this.newTaskText = "";
-        this.newTaskGroup = "all";
-        this.newTaskFactor = 50;
       },
       onLeftClick() {
-        this.expanded = true;
-  
-        this.$nextTick(() => {
-          this.inputAdjust();
-        })
+        if(!this.expanded) {
+          this.expanded = true;
+    
+          this.$nextTick(() => {
+            this.inputAdjust();
+          })
+        }
       },
       onLeftClickTask(key) {
         if(key in this.prioritytasklist.task) {

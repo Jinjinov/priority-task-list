@@ -9,6 +9,9 @@ body {
 img {
     vertical-align: bottom; /* solution for space under image */
 }
+label {
+    padding: 1px;
+}
 input[type="text"] {
     height: 18px; /* chrome - firefox */
     line-height: 18px; /* chrome - firefox */
