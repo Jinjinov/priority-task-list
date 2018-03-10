@@ -1,6 +1,6 @@
 /* exported tasks */
 
-// TODO:: YAML:
+// TODO::LATER YAML:
 // https://stackoverflow.com/questions/9043765/how-to-parse-yaml-in-the-browser
 // https://stackoverflow.com/questions/4335804/javascript-yaml-parser
 // https://github.com/nodeca/js-yaml
@@ -8,7 +8,7 @@
 // https://github.com/tj/js-yaml
 // https://github.com/connec/yaml-js
 
-// TODO:: sleep, work, family / friends, shopping, exercises
+// TODO::LATER sleep, work, family / friends, shopping, exercises
 
 var tasks = [
     //GROOM - clean:

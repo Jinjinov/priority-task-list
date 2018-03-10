@@ -31,22 +31,21 @@ function deleteDatabase(){
     // TODO:: pwa - chrome developer tools - audit - lighthouse:
     // HTTPS
     // HTTP/2
-    // TODO:: development mode -> production mode
 
-    // TODO::LATER sign in: using Google, Facebook, Twitter, ...
+    // TODO::SOON sign in: using Google, Facebook, Twitter, ...
     // - https://github.com/websanova/vue-auth
     // - https://github.com/dgrubelic/vue-authenticate
     // X - https://github.com/auth0-blog/vue-jwt-authentication - NodeJS, JSON Web Token
 
-    // TODO::LATER one database per user - https://gist.github.com/nolanlawson/9676093
+    // TODO::SOON one database per user - https://gist.github.com/nolanlawson/9676093
 
-    // TODO::SOON repeat interval: fixed interval
-    // TODO::SOON scheduled time: time in day / day in week / day in month / day in year
-    // TODO::SOON fixed date
+    // TODO::LATER repeat interval: fixed interval
+    // TODO::LATER scheduled time: time in day / day in week / day in month / day in year
+    // TODO::LATER fixed date
     // - duration is more important: sleep, work - scheduled time
     // - ‎number of repetitions is more important: brush teeth, shower, shave - time elapsed since last repetition
 
-    // TODO::SOON groups with base priority offset: y = k * x + n
+    // TODO::LATER groups with base priority offset: y = k * x + n
     // - sleep / rest
     // - work
     // - groom
