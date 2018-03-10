@@ -22,7 +22,7 @@ var urlstocache = [
   'icons/week.png',
   'https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css',
   'https://cdnjs.cloudflare.com/ajax/libs/pouchdb/6.4.3/pouchdb.min.js',
-  'https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.min.js'
+  'https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.14/vue.min.js'
 ];
 
 // install/cache page assets
