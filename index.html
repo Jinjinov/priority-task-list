@@ -131,9 +131,9 @@
             v-on:save="updateTask(task._id)"
             v-on:remove="deleteTask(task._id)"
             v-on:activity="onTaskActivity(task._id)"
-            v-on:click.native="onLeftClickTask(task._id)"
             :color="taskGroups[task.group]"
-          ></task-item>
+            ></task-item>
+            <!-- v-on:click.native="onLeftClickTask(task._id)" -->
         </div>
       </div>
     </div>
@@ -156,13 +156,6 @@
           });
         });
       }
-    </script>
-    <script>
-      //new PouchDB("prioritytasklist").destroy().then(function () {
-      //    // database destroyed
-      //  }).catch(function (err) {
-      //    // error occurred
-      //  })
     </script>
   </body>
 </html>
