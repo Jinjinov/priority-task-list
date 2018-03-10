@@ -1,3 +1,5 @@
+/* global Vue PouchDB */
+
 const init = vm => {
     const bindings = vm.$options.pouchdb
     if (!bindings) {

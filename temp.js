@@ -1,3 +1,6 @@
+/* global PouchDB */
+/* exported getWidthOfText deleteDatabase */
+
 function getWidthOfText(txt, fontsize, fontname){
     if(getWidthOfText.e === undefined){
         getWidthOfText.e = document.createElement('span');

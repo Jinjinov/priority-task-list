@@ -1,3 +1,5 @@
+/* global Vue tasks */
+
 // The JSON standard specifies that all key/value pairs should be in double quotes.
 
 //-------------------------------------------------------------------------
