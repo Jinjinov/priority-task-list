@@ -227,7 +227,7 @@ new Vue({
     pouchdb: {
       prioritytasklist: {
         localDB: "prioritytasklist",
-        remoteURL: "http://93.103.155.251:5984/prioritytasklist"
+        //remoteURL: "http://93.103.155.251:5984/prioritytasklist"
       }
     },
     //-------------------------------------------------------------------------
