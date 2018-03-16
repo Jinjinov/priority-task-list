@@ -16,7 +16,7 @@ function getWidthOfText(txt, fontsize, fontname){
 function deleteDatabase(){
     new PouchDB("prioritytasklist").destroy().then(function () {
         // database destroyed
-    }).catch(function (err) {
+    }).catch(function () {
         // error occurred
     })
 }
@@ -32,6 +32,10 @@ function deleteDatabase(){
     // HTTPS
     // HTTP/2
 
+    // TODO:: compact mode is default, expanded mode only on selected task - remove checkbox
+
+    // TODO:: change group filter from combo box to list of check boxes
+
     // TODO::SOON sign in: using Google, Facebook, Twitter, ...
     // - https://github.com/websanova/vue-auth
     // - https://github.com/dgrubelic/vue-authenticate
@@ -39,13 +43,13 @@ function deleteDatabase(){
 
     // TODO::SOON one database per user - https://gist.github.com/nolanlawson/9676093
 
-    // TODO::LATER repeat interval: fixed interval
-    // TODO::LATER scheduled time: time in day / day in week / day in month / day in year
-    // TODO::LATER fixed date
+    // TODO::SOON - PAUSE FOR - repeat interval: fixed interval
+    // TODO::SOON - PAUSE UNTIL - scheduled time: time in day / day in week / day in month / day in year
+    // TODO::SOON - PAUSE UNTIL - fixed date
     // - duration is more important: sleep, work - scheduled time
     // - ‎number of repetitions is more important: brush teeth, shower, shave - time elapsed since last repetition
 
-    // TODO::LATER groups with base priority offset: y = k * x + n
+    // TODO::LATER "desire groups" with base priority offset: y = k * x + n
     // - sleep / rest
     // - work
     // - groom
@@ -55,7 +59,7 @@ function deleteDatabase(){
     // - mind
     // - relax / enjoy
 
-    // TODO::LATER detailed first step plan: what, when, where, who, why, how, ...
+    // TODO::LATER "desire label" plan: what, when, where, who, why, how, ...
 
     // TODO::LATER counter of minutes spent on task
     // TODO::LATER completed: too soon / on time / too late --> auto priority adjustment
