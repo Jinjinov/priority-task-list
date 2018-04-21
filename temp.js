@@ -36,6 +36,9 @@ function deleteDatabase(){
 
     // TODO:: change group filter from combo box to list of check boxes
 
+    // TODO:: priority factor -> importance
+    // TODO:: priority -> neglect
+
     // TODO::SOON sign in: using Google, Facebook, Twitter, ...
     // - https://github.com/websanova/vue-auth
     // - https://github.com/dgrubelic/vue-authenticate
@@ -59,7 +62,7 @@ function deleteDatabase(){
     // - mind
     // - relax / enjoy
 
-    // TODO::LATER "desire label" plan: what, when, where, who, why, how, ...
+    // TODO::LATER "desire label" plan: *WHAT*, when, where, who, *WHY*, how, ...
 
     // TODO::LATER counter of minutes spent on task
     // TODO::LATER completed: too soon / on time / too late --> auto priority adjustment
@@ -122,3 +125,73 @@ function deleteDatabase(){
     // https://vuejs.org/v2/guide/events.html
 
     // https://vuejs.org/v2/guide/list.html#Displaying-Filtered-Sorted-Results
+
+    /*
+    prioritized activity list
+    
+    DONATE button
+
+    https://www.whoishostingthis.com/compare/couchdb/
+    https://www.a2hosting.com/couchdb-hosting
+    
+    www what should i be doing right now com
+    
+    DO A HARDCODED EXAMPLE FIRST
+    
+    - repeat interval: fixed interval
+    - scheduled time: time in day / day in week / day in month / day in year
+    - fixed date
+    
+    - duration is more important: sleep, work - scheduled time
+    - ‎number of repetitions is more important: brush teeth, shower, shave - time elapsed since last repetition
+    
+    - if scheduled activity time
+    - - if doing it
+    - - - do scheduled activity
+    - - else
+    - - - if can be done before next scheduled activity
+    - - - - if doing approved activity
+    - - - - - keep doing approved activity
+    - - - - else
+    - - - - - do scheduled activity
+    - - - else
+    - - - - if doing emergency activity
+    - - - - - keep doing emergency activity
+    - - - - else
+    - - - - - do scheduled activity
+    - else
+    - - do first activity on prioritized list
+    
+    scheduled
+    - sleep / rest
+    - work
+    - groom
+    - cook / eat
+    - chores
+    - body
+    - mind
+    - relax / enjoy
+    
+    prioritized
+    - exercise
+    - laundry
+    - cleaning
+    - shower
+    - gaming
+    - learning / hobby
+    - tv series / movies
+    - reading
+    
+    prioritized list
+    - by time of day - LIST
+    - by time elapsed since last time - FORMULA - POLYNOMIAL
+    - by other activities accomplished??? NO!!!
+    
+    + priority on conditions
+    - sunny day
+    - rainy day
+    - snowing
+    - time to go to sleep
+    - just woke up
+    - free all day
+    /**/
